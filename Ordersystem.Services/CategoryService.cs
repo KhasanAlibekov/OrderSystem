@@ -12,8 +12,8 @@ namespace Ordersystem.Services
     {
         List<Category> GetAllCategories();
         Category GetCategoryByID(int id);
-        void Add(Category category);
-        Category Update(int id, Category newCategory);
+        void Create(Category category);
+        Category Update(Category newCategory);
         void Delete(int id);
     }
     public class CategoryService : ICategoryService
@@ -21,18 +21,22 @@ namespace Ordersystem.Services
         private readonly ApplicationDbContext _context;
         public CategoryService(ApplicationDbContext context) // Contructor injection
         {
-
             this._context = context;
-
         }
-        public void Add(Category category)
+        public void Create(Category category)
         {
-            throw new NotImplementedException();
+            var result = _context.Categories.Add(category);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var result = _context.Categories.FirstOrDefault(c => c.CategoryID == id, null);
+            if (result != null)
+            {
+                _context.Categories.Remove(result);
+                _context.SaveChanges();
+            }
         }
 
         public List<Category> GetAllCategories()
@@ -43,12 +47,20 @@ namespace Ordersystem.Services
 
         public Category GetCategoryByID(int id)
         {
-            throw new NotImplementedException();
+            var result = _context.Categories.FirstOrDefault(c => c.CategoryID == id) ?? new Category();
+            return result;
         }
 
-        public Category Update(int id, Category newCategory)
+        public Category Update(Category newCategory)
         {
-            throw new NotImplementedException();
+            var result = _context.Categories.Attach(newCategory);
+
+            var entity = _context.ChangeTracker.Entries()
+                .FirstOrDefault(e => e.Entity == newCategory);
+            entity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            _context.SaveChanges();
+            return newCategory;
         }
     }
 }
