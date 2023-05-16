@@ -13,7 +13,7 @@ namespace Ordersystem.DataObjects
     {
         [Key]
         [Column("Id")]
-        public Guid CategoryID { get; set; }
+        public int CategoryID { get; set; }
         [Required]
         [MaxLength(30)]
         public string CategoryName { get; set; }

@@ -13,18 +13,18 @@ namespace Ordersystem.DataObjects
     {
         [Key]
         [Column("Id")]
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
         [Required]
         public string ProductName { get; set; }
         public double Price { get; set; }
         public int UnitInStock { get; set; }
 
         [ForeignKey(nameof(Supplier))]
-        public Guid SupplierID { get; set; }
+        public int SupplierID { get; set; }
         public Supplier Supplier { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public Guid CategoryID { get; set; }
+        public int CategoryID { get; set; }
         public Category Category { get; set; }
     }
 }

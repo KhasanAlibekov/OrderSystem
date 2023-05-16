@@ -24,10 +24,12 @@ namespace Ordersystem.DataAccess.Migrations
 
             modelBuilder.Entity("Ordersystem.DataObjects.Category", b =>
                 {
-                    b.Property<Guid>("CategoryID")
+                    b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -41,10 +43,12 @@ namespace Ordersystem.DataAccess.Migrations
 
             modelBuilder.Entity("Ordersystem.DataObjects.Order", b =>
                 {
-                    b.Property<Guid>("OrderID")
+                    b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
                     b.Property<double>("OrderAmount")
                         .HasColumnType("float");
@@ -65,13 +69,15 @@ namespace Ordersystem.DataAccess.Migrations
 
             modelBuilder.Entity("Ordersystem.DataObjects.Product", b =>
                 {
-                    b.Property<Guid>("ProductID")
+                    b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("CategoryID")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -80,8 +86,8 @@ namespace Ordersystem.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SupplierID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("SupplierID")
+                        .HasColumnType("int");
 
                     b.Property<int>("UnitInStock")
                         .HasColumnType("int");
@@ -97,10 +103,12 @@ namespace Ordersystem.DataAccess.Migrations
 
             modelBuilder.Entity("Ordersystem.DataObjects.Supplier", b =>
                 {
-                    b.Property<Guid>("SupplierID")
+                    b.Property<int>("SupplierID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierID"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");

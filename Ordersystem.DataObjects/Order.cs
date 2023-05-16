@@ -13,7 +13,7 @@ namespace Ordersystem.DataObjects
     {
         [Key]
         [Column("Id")]
-        public Guid OrderID { get; set; }
+        public int OrderID { get; set; }
         public double OrderAmount { get; set; }
         public DateTime OrderDate { get; set; }
         public bool Shipped { get; set; }

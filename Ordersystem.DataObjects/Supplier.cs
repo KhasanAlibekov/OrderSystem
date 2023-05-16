@@ -13,7 +13,7 @@ namespace Ordersystem.DataObjects
     {
         [Key]
         [Column("Id")]
-        public Guid SupplierID { get; set; }
+        public int SupplierID { get; set; }
         [Required]
         public int VATNumber { get; set; }
         [Required]
