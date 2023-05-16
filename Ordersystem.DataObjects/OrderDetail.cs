@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace Ordersystem.DataObjects
 {
+    [Table("TblOrderDetail")]
     public class OrderDetail
     {
         public double UnitPrice { get; set; }
         public int Quantity { get; set; }
+
+        [ForeignKey(nameof(Order))]
+        public Guid OrderID { get; set; }
+        public Order Order { get; set; }
+
+        [ForeignKey(nameof(Product))]
+        public Guid ProductID { get; set; }
+        public Product Product { get; set; }
     }
 }
