@@ -101,7 +101,6 @@ namespace Ordersystem.API.Controllers
         {
             try
             {
-                //car met id opzoeken
                 var categoryToUpdate = _categoryService.Update(id, new Ordersystem.DataObjects.Category
                 {
                     CategoryName = category.CategoryName,

@@ -3,7 +3,10 @@ using Ordersystem.DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Net;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,9 +47,44 @@ namespace Ordersystem.DataAccess
                     Country = "Belgium",
                     Phone = "0478688699",
                     Email = "notyours@gmail.com",
+                },
+                new Supplier
+                {
+                    SupplierID = 2,
+                    VATNumber = 87966676,
+                    SupplierName = "Unilever",
+                    Address = "Je ne sais pas 4",
+                    City = "Lille",
+                    PostalCode = "9807",
+                    Country = "France",
+                    Phone = "989997478688699",
+                    Email = "france@gmail.com",
+                },
+                new Supplier
+                {
+                    SupplierID = 3,
+                    VATNumber = 765868797,
+                    SupplierName = "Ok",
+                    Address = "Niet goed 7",
+                    City = "Nergens",
+                    PostalCode = "9807",
+                    Country = "Zwitserland",
+                    Phone = "79797987987987",
+                    Email = "zweten@gmail.com",
+                },
+                new Supplier
+                {
+                    SupplierID = 4,
+                    VATNumber = 87666565,
+                    SupplierName = "Goedzo",
+                    Address = "Niet goed 4",
+                    City = "Praag",
+                    PostalCode = "98787",
+                    Country = "Tsjechie",
+                    Phone = "878787",
+                    Email = "czech@gmail.com",
                 }
                 );
-
         }
     }
 }
