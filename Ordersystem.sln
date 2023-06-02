@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33706.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.Web", "Ordersystem.Web\Ordersystem.Web.csproj", "{1E4038AE-D0D8-4D71-91AB-A62A2B783F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.Web", "Ordersystem.Web\Ordersystem.Web.csproj", "{1E4038AE-D0D8-4D71-91AB-A62A2B783F22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.DataAccess", "Ordersystem.DataAccess\Ordersystem.DataAccess.csproj", "{8EF34308-3821-4904-9B06-6E56E479CED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.DataAccess", "Ordersystem.DataAccess\Ordersystem.DataAccess.csproj", "{8EF34308-3821-4904-9B06-6E56E479CED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.DataObjects", "Ordersystem.DataObjects\Ordersystem.DataObjects.csproj", "{D7B4D794-4E54-4B79-BA89-668649A1EE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.DataObjects", "Ordersystem.DataObjects\Ordersystem.DataObjects.csproj", "{D7B4D794-4E54-4B79-BA89-668649A1EE72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.Services", "Ordersystem.Services\Ordersystem.Services.csproj", "{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.Services", "Ordersystem.Services\Ordersystem.Services.csproj", "{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.API", "Ordersystem.API\Ordersystem.API.csproj", "{45205303-53D8-42C4-89F2-5581EBE13188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45205303-53D8-42C4-89F2-5581EBE13188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45205303-53D8-42C4-89F2-5581EBE13188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45205303-53D8-42C4-89F2-5581EBE13188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45205303-53D8-42C4-89F2-5581EBE13188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
