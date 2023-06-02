@@ -29,7 +29,8 @@ namespace Ordersystem.Web.Controllers
         {
             var data = _service.GetCategoryByID(id);
             await TryUpdateModelAsync(data);
-            _service.Update(data);
+            _service.Update(id, data);
+            TempData["succes"] = "Category updated succesfully";
             return RedirectToAction("Index");
         }
 
