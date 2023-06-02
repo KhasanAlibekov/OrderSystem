@@ -2,6 +2,7 @@
 using Ordersystem.DataObjects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,27 @@ namespace Ordersystem.DataAccess
             {
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-8FFVHLE;Database=Ordersytem.DB;Integrated Security=True;Trust Server Certificate=True");
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Supplier>().HasData(
+                new Supplier
+                {
+                    SupplierID = 1,
+                    VATNumber = 123456789,
+                    SupplierName = "Syntra",
+                    Address = "Pluim 4",
+                    City = "Zwevegem",
+                    PostalCode = "9807",
+                    Country = "Belgium",
+                    Phone = "0478688699",
+                    Email = "notyours@gmail.com",
+                }
+                );
+
         }
     }
 }
