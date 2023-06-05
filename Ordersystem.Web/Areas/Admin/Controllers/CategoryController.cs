@@ -2,14 +2,15 @@
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 
-namespace Ordersystem.Web.Controllers
+namespace Ordersystem.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         ICategoryService _service;
         public CategoryController(ICategoryService service)
         {
-            this._service = service;
+            _service = service;
         }
         [Route("Category")]
 
@@ -45,7 +46,7 @@ namespace Ordersystem.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               _service.Create(objCategory);
+                _service.Create(objCategory);
                 TempData["succes"] = "Category created succesfully";
                 return RedirectToAction("Index", "Category");
             }

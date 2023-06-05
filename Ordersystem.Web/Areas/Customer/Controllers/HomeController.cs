@@ -2,8 +2,9 @@
 using Ordersystem.Web.Models;
 using System.Diagnostics;
 
-namespace Ordersystem.Web.Controllers
+namespace Ordersystem.Web.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
