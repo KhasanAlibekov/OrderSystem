@@ -2,14 +2,15 @@
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 
-namespace Ordersystem.Web.Controllers
+namespace Ordersystem.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SupplierController : Controller
     {
         ISupplierService _service;
         public SupplierController(ISupplierService service)
         {
-            this._service = service;
+            _service = service;
         }
         [Route("Supplier")]
         public IActionResult Index()
