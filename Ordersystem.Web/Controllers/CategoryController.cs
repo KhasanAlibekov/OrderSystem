@@ -12,10 +12,12 @@ namespace Ordersystem.Web.Controllers
             this._service = service;
         }
         [Route("Category")]
+
+        // This is an endpoint of an action method, how will this endpoint be triggered?
         public IActionResult Index()
         {
-            var data = _service.GetAllCategories();
-            return View(data);
+            List<Category> objCategoryList = _service.GetAllCategories();
+            return View(objCategoryList);
         }
 
         public IActionResult Edit(int id)
@@ -45,7 +47,7 @@ namespace Ordersystem.Web.Controllers
             {
                _service.Create(objCategory);
                 TempData["succes"] = "Category created succesfully";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Category");
             }
             return View();
         }

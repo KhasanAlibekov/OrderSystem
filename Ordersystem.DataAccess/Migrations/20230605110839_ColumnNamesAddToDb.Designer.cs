@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ordersystem.DataAccess;
 
@@ -11,9 +12,11 @@ using Ordersystem.DataAccess;
 namespace Ordersystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605110839_ColumnNamesAddToDb")]
+    partial class ColumnNamesAddToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,28 +43,6 @@ namespace Ordersystem.DataAccess.Migrations
                     b.HasKey("CategoryID");
 
                     b.ToTable("TblCategory");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryID = 1,
-                            CategoryName = "Trucks"
-                        },
-                        new
-                        {
-                            CategoryID = 2,
-                            CategoryName = "Phones"
-                        },
-                        new
-                        {
-                            CategoryID = 3,
-                            CategoryName = "Sport"
-                        },
-                        new
-                        {
-                            CategoryID = 4,
-                            CategoryName = "Broadcast"
-                        });
                 });
 
             modelBuilder.Entity("Ordersystem.DataObjects.Order", b =>

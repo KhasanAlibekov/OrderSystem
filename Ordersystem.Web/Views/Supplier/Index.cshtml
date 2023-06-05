@@ -32,7 +32,7 @@
                     <th>
                         VAT NUmber
                     </th>
-                    <th>
+                    @* <th>
                         Street
                     </th>
                     <th>
@@ -43,7 +43,7 @@
                     </th>
                     <th>
                         Country
-                    </th>
+                    </th> *@
                     <th>
                         Telephone number
                     </th>
@@ -63,7 +63,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.VATNumber)
                         </td>
-                        <td>
+                       @*  <td>
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
                         <td>
@@ -74,7 +74,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Country)
-                        </td>
+                        </td> *@
                         <td>
                             @Html.DisplayFor(modelItem => item.Phone)
                         </td>
@@ -83,15 +83,15 @@
                         </td>
 
                         <td>
-
+                            <div>
                             <a asp-controller="Supplier" asp-action="Edit" asp-route-id="@item.SupplierID" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
-                            <div style="margin-bottom: 10px;"></div>
+                            @* <div style="margin-bottom: 10px;"></div> *@
                             <a asp-controller="Supplier" asp-action="Delete" asp-route-id="@item.SupplierID" class="btn btn-danger mx-2">
                                 <i class="bi bi-trash"></i> Delete
                             </a>
-
+                            </div>
                         </td>
                     </tr>
                 }

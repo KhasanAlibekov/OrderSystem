@@ -2,7 +2,6 @@
 
 
 
-<div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -13,20 +12,15 @@
     <div class="card-body p-4">
         <form method="post" class="row">
             <div class="border p-3">
-                @* <div asp-validation-summary="All"></div>*@
+                @* <div asp-validation-summary="All"></div> to display summer on the top if used single validation use asp-validation-for*@
+            <div asp-validation-summary="All"></div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="CategoryName" class="form-control border-0 shadow" />
-                    <label asp-for="CategoryName" class="ms-2">@*Category Name*@</label>
-                    
+                    <input asp-for="CategoryName" class="form-control border-0" />
+                    <label asp-for="CategoryName" class="ms-2"></label>
+                    @* error message shown on the client side *@
                     <span asp-validation-for="CategoryName" class="text-danger"></span>
                 </div>
-                @*<div class="form-floating py-2 col-12">
-                    <input asp-for="DisplayOrder" class="form-control border-0 shadow" />
-                    <label asp-for="DisplayOrder" class="ms-2">Display Order</label>
-                   
-                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-                </div>*@
-
+                 @* by adding class row we can make it responsive, col-md-3 it will take 6 column *@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Create</button>
@@ -42,7 +36,6 @@
 
         </form>
     </div>
-</div>
 
 
 

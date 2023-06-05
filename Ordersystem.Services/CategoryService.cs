@@ -33,11 +33,11 @@ namespace Ordersystem.Services
             return _context.Categories.Where(c => c.CategoryID == id).FirstOrDefault();
         }
 
-        public Category Create(Category category)
+        public Category Create(Category objCategory)
         {
-            _context.Categories.Add(category);
+            _context.Categories.Add(objCategory);
             _context.SaveChanges();
-            return category;
+            return objCategory;
         }
 
         public Category Update(int id, Category newCategory)

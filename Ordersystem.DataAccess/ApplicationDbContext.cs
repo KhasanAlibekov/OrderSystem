@@ -19,21 +19,29 @@ namespace Ordersystem.DataAccess
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public ApplicationDbContext() { }
+        //public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-8FFVHLE;Database=Ordersytem.DB;Integrated Security=True;Trust Server Certificate=True");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    //if (!optionsBuilder.IsConfigured)
+        //    //{
+        //    //    optionsBuilder.UseSqlServer("Data Source=DESKTOP-8FFVHLE;Database=Ordersytem.DB;Integrated Security=True;Trust Server Certificate=True");
+        //    //}
+        //}
 
+        // Seed Category and Supplier tables to the Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category { CategoryID = 1, CategoryName = "Trucks" },
+                new Category { CategoryID = 2, CategoryName = "Phones" },
+                new Category { CategoryID = 3, CategoryName = "Sport" },
+                new Category { CategoryID = 4, CategoryName = "Broadcast" }
+                );
 
             modelBuilder.Entity<Supplier>().HasData(
                 new Supplier
