@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 
 namespace Ordersystem.DataObjects
 {
@@ -13,28 +14,34 @@ namespace Ordersystem.DataObjects
     public class Product
     {
         [Key]
-        [Column("Id")]
+        [Column("Product_ID")]
         public int ProductID { get; set; }
         [Required]
+        [Column("Product_Title")]
         public string Title { get; set; }
         [Required]
+        [Column("Product_Description")]
         public string Description { get; set; }
         [Required]
+        [Column("Product_Price")]
         public double Price { get; set; }
         [Required]
+        [Column("Product_UnitInStock")]
+        [DisplayName("Unit in stock")]
         public int UnitInStock { get; set; }
 
-        [ForeignKey(nameof(Supplier))]
+        [ForeignKey("Supplier")]
         [ValidateNever]
         public int SupplierID { get; set; }
         public Supplier Supplier { get; set; }
 
-        [ForeignKey(nameof(Category))]
+        [ForeignKey("Category")]
         [ValidateNever]
         public int CategoryID { get; set; }
         public Category Category { get; set; }
 
         [ValidateNever]
+        [Column("Product_ImageUrl")]
         public string ImageUrl { get; set; }
     }
 }

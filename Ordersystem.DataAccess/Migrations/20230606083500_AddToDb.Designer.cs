@@ -12,8 +12,8 @@ using Ordersystem.DataAccess;
 namespace Ordersystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230602113121_UpdateSuppierTable")]
-    partial class UpdateSuppierTable
+    [Migration("20230606083500_AddToDb")]
+    partial class AddToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,18 +30,41 @@ namespace Ordersystem.DataAccess.Migrations
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("Category_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("Category_Name");
 
                     b.HasKey("CategoryID");
 
                     b.ToTable("TblCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Trucks"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Phones"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Sport"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Broadcast"
+                        });
                 });
 
             modelBuilder.Entity("Ordersystem.DataObjects.Order", b =>
@@ -75,7 +98,7 @@ namespace Ordersystem.DataAccess.Migrations
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("Product_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
@@ -84,24 +107,29 @@ namespace Ordersystem.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Product_Description");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Product_ImageUrl");
 
                     b.Property<double>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("float")
+                        .HasColumnName("Product_Price");
 
                     b.Property<int>("SupplierID")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Product_Title");
 
                     b.Property<int>("UnitInStock")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Product_UnitInStock");
 
                     b.HasKey("ProductID");
 
@@ -110,6 +138,41 @@ namespace Ordersystem.DataAccess.Migrations
                     b.HasIndex("SupplierID");
 
                     b.ToTable("TblProduct");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = 1,
+                            CategoryID = 1,
+                            Description = "Somethings happen for a reason",
+                            ImageUrl = "",
+                            Price = 9.9900000000000002,
+                            SupplierID = 1,
+                            Title = "Something",
+                            UnitInStock = 10
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            CategoryID = 1,
+                            Description = "Nothing will be done today",
+                            ImageUrl = "",
+                            Price = 100.98999999999999,
+                            SupplierID = 2,
+                            Title = "Nothing",
+                            UnitInStock = 666
+                        },
+                        new
+                        {
+                            ProductID = 3,
+                            CategoryID = 1,
+                            Description = "IDK is my motto",
+                            ImageUrl = "",
+                            Price = 0.98999999999999999,
+                            SupplierID = 3,
+                            Title = "IDK",
+                            UnitInStock = 879
+                        });
                 });
 
             modelBuilder.Entity("Ordersystem.DataObjects.Supplier", b =>
@@ -117,34 +180,42 @@ namespace Ordersystem.DataAccess.Migrations
                     b.Property<int>("SupplierID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("Supplier_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierID"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_Address");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_City");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_Country");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_Email");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_PhoneNumber");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_PostalCode");
 
                     b.Property<string>("SupplierName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Supplier_Name");
 
                     b.Property<int>("VATNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Supplier_VATNumber");
 
                     b.HasKey("SupplierID");
 
@@ -162,6 +233,42 @@ namespace Ordersystem.DataAccess.Migrations
                             PostalCode = "9807",
                             SupplierName = "Syntra",
                             VATNumber = 123456789
+                        },
+                        new
+                        {
+                            SupplierID = 2,
+                            Address = "Je ne sais pas 4",
+                            City = "Lille",
+                            Country = "France",
+                            Email = "france@gmail.com",
+                            Phone = "989997478688699",
+                            PostalCode = "9807",
+                            SupplierName = "Unilever",
+                            VATNumber = 87966676
+                        },
+                        new
+                        {
+                            SupplierID = 3,
+                            Address = "Niet goed 7",
+                            City = "Nergens",
+                            Country = "Zwitserland",
+                            Email = "zweten@gmail.com",
+                            Phone = "79797987987987",
+                            PostalCode = "9807",
+                            SupplierName = "Ok",
+                            VATNumber = 765868797
+                        },
+                        new
+                        {
+                            SupplierID = 4,
+                            Address = "Niet goed 4",
+                            City = "Praag",
+                            Country = "Tsjechie",
+                            Email = "czech@gmail.com",
+                            Phone = "878787",
+                            PostalCode = "98787",
+                            SupplierName = "Goedzo",
+                            VATNumber = 87666565
                         });
                 });
 
