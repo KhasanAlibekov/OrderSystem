@@ -22,7 +22,7 @@
             </a>
         </div>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-responsive table-bordered table-striped table-sm">
         <thead>
             <tr>
                 <th>
@@ -63,7 +63,7 @@
                         @obj.ImageUrl
                     </td>
 
-                    <td>
+                    <td class="text-center">
                         <div>
                         <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.ProductID" class="btn btn-primary mx-2">
                             <i class="bi bi-pencil-square"></i> Edit

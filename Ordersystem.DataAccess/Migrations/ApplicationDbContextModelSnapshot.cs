@@ -99,7 +99,7 @@ namespace Ordersystem.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
-                    b.Property<int>("CategoryID")
+                    b.Property<int?>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -116,7 +116,7 @@ namespace Ordersystem.DataAccess.Migrations
                         .HasColumnType("float")
                         .HasColumnName("Product_Price");
 
-                    b.Property<int>("SupplierID")
+                    b.Property<int?>("SupplierID")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -273,15 +273,11 @@ namespace Ordersystem.DataAccess.Migrations
                 {
                     b.HasOne("Ordersystem.DataObjects.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryID");
 
                     b.HasOne("Ordersystem.DataObjects.Supplier", "Supplier")
                         .WithMany()
-                        .HasForeignKey("SupplierID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SupplierID");
 
                     b.Navigation("Category");
 

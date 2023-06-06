@@ -43,6 +43,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Product objProduct)
         {
+            Console.WriteLine(ModelState.First());
             if (ModelState.IsValid)
             {
                 _service.Create(objProduct);

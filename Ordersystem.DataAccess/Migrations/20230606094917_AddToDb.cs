@@ -72,8 +72,8 @@ namespace Ordersystem.DataAccess.Migrations
                     Product_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Product_Price = table.Column<double>(type: "float", nullable: false),
                     Product_UnitInStock = table.Column<int>(type: "int", nullable: false),
-                    SupplierID = table.Column<int>(type: "int", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    SupplierID = table.Column<int>(type: "int", nullable: true),
+                    CategoryID = table.Column<int>(type: "int", nullable: true),
                     Product_ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -83,14 +83,12 @@ namespace Ordersystem.DataAccess.Migrations
                         name: "FK_TblProduct_TblCategory_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "TblCategory",
-                        principalColumn: "Category_ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Category_ID");
                     table.ForeignKey(
                         name: "FK_TblProduct_TblSupplier_SupplierID",
                         column: x => x.SupplierID,
                         principalTable: "TblSupplier",
-                        principalColumn: "Supplier_ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Supplier_ID");
                 });
 
             migrationBuilder.InsertData(
