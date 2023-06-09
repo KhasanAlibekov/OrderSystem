@@ -12,7 +12,7 @@ using Ordersystem.DataAccess;
 namespace Ordersystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230606094917_AddToDb")]
+    [Migration("20230608125714_AddToDb")]
     partial class AddToDb
     {
         /// <inheritdoc />

@@ -30,13 +30,13 @@ namespace Ordersystem.DataObjects
         [DisplayName("Unit in stock")]
         public int UnitInStock { get; set; }
 
-        [ForeignKey("Supplier")]
         [ValidateNever]
+        [ForeignKey("Supplier")]
         public int? SupplierID { get; set; }
         public Supplier? Supplier { get; set; }
 
-        [ForeignKey("Category")]
         [ValidateNever]
+        [ForeignKey("Category")]
         public int? CategoryID { get; set; }
         public Category? Category { get; set; }
 

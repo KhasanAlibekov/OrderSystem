@@ -5,35 +5,34 @@ using Ordersystem.Services;
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class OrderController : Controller
     {
-        ICategoryService _service;
-        public CategoryController(ICategoryService service)
+        IOrderService _service;
+        public OrderController(IOrderService service)
         {
             _service = service;
         }
 
-        [Route("Category")]
-        // This is an endpoint of an action method, how will this endpoint be triggered?
+        [Route("orders")]
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _service.GetAllCategories();
-            return View(objCategoryList);
+            var data = _service.GetAllOrders();
+            return View(data);
         }
 
         public IActionResult Edit(int id)
         {
-            var data = _service.GetCategoryByID(id);
+            var data = _service.GetOrderByID(id);
             return View(data);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Category objCategory)
+        public async Task<IActionResult> Edit(int id, Order objOrder)
         {
-            var data = _service.GetCategoryByID(id);
+            var data = _service.GetOrderByID(id);
             await TryUpdateModelAsync(data);
             _service.Update(id, data);
-            TempData["succes"] = "Category updated succesfully";
+            TempData["succes"] = "Order updated succesfully";
             return RedirectToAction("Index");
         }
 
@@ -42,12 +41,12 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Category objCategory)
+        public IActionResult Create(Order objOrder)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(objCategory);
-                TempData["succes"] = "Category created succesfully";
+                _service.Create(objOrder);
+                TempData["succes"] = "Order created succesfully";
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -55,14 +54,14 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var data = _service.GetCategoryByID(id);
+            var data = _service.GetOrderByID(id);
             return View(data);
         }
         [HttpPost]
-        public IActionResult Delete(int id, Category objCategory)
+        public IActionResult Delete(int id, Order objOrder)
         {
             _service.Delete(id);
-            TempData["succes"] = "Category deleted succesfully";
+            TempData["succes"] = "Order deleted succesfully";
             return RedirectToAction("Index");
         }
     }

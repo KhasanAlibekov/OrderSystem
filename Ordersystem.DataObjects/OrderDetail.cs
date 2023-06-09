@@ -15,11 +15,11 @@ namespace Ordersystem.DataObjects
         public int Quantity { get; set; }
 
         [ForeignKey(nameof(Order))]
-        public int OrderID { get; set; }
-        public Order Order { get; set; }
+        public int? OrderID { get; set; }
+        public Order? Order { get; set; }
 
         [ForeignKey(nameof(Product))]
-        public int ProductID { get; set; }
-        public Product Product { get; set; }
+        public int? ProductID { get; set; }
+        public Product? Product { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ordersystem.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using Ordersystem.DataAccess;
 using Ordersystem.DataObjects;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Ordersystem.Services
 
         public List<Product> GetAllProducts()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(u=>u.Category).Include(u=>u.Supplier).ToList();
         }
 
         public Product? GetProductByID(int id)
@@ -48,10 +49,15 @@ namespace Ordersystem.Services
 
             if (productToUpdate != null)
             {
+                // Update only properties that were changed
                 productToUpdate.Title = newProduct.Title;
                 productToUpdate.Description = newProduct.Description;
                 productToUpdate.Price = newProduct.Price;
                 productToUpdate.UnitInStock = newProduct.UnitInStock;
+                if (productToUpdate.ImageUrl != null)
+                {
+                    productToUpdate.ImageUrl = newProduct.ImageUrl;
+                }
 
                 _context.Update(productToUpdate);
                 _context.SaveChanges();

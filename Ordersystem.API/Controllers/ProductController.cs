@@ -10,10 +10,14 @@ namespace Ordersystem.API.Controllers
     public class ProductController : ControllerBase
     {
         IProductService _productService;
+        ICategoryService _categoryService;
+        ISupplierService _supplierService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
         {
             _productService = productService;
+            _categoryService = categoryService;
+            _supplierService = supplierService;
         }
 
         [HttpGet]
@@ -23,6 +27,9 @@ namespace Ordersystem.API.Controllers
             {
                 var listProduct = _productService.GetAllProducts();
 
+                var category = _categoryService.GetAllCategories();
+
+                var supplier = _supplierService.GetAllSuppliers();
                 return Ok(listProduct);
             }
             catch (Exception e)
@@ -80,6 +87,10 @@ namespace Ordersystem.API.Controllers
         {
             try
             {
+                var category = _categoryService.GetCategoryByID(product.CategoryID);
+                if (category == null)
+                    return BadRequest("Invalid Category ID");
+
                 var CreatedProduct = _productService.Create(new Ordersystem.DataObjects.Product
                 {
                     Title = product.Title,
@@ -87,7 +98,9 @@ namespace Ordersystem.API.Controllers
                     Price = product.Price,
                     UnitInStock = product.UnitInStock,
                     ImageUrl = product.ImageUrl,
+                    Category = category,
                 });
+
 
                 return CreatedAtAction("GetById", new { id = CreatedProduct.ProductID }, CreatedProduct);
             }

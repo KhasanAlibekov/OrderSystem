@@ -132,8 +132,37 @@ namespace Ordersystem.DataAccess
                         Price = 0.99D,
                         UnitInStock = 879,
                         ImageUrl = ""
-                    } 
+                    }
                     #endregion
+
+            //        #region Order data
+
+            //modelBuilder.Entity<Order>().HasData(
+            //        new Order
+            //        {
+            //            OrderID = 1,
+            //            OrderAmount = 1.99,
+            //            OrderDate = new DateTime(2020, 12, 2),
+            //            Shipped = true,
+            //            PaymentReceived = true,
+            //        },
+            //        new Order
+            //        {
+            //            OrderID = 2,
+            //            OrderAmount = 19.99,
+            //            OrderDate = new DateTime(2021, 1, 3),
+            //            Shipped = true,
+            //            PaymentReceived = true,
+            //        },
+            //        new Order
+            //        {
+            //            OrderID = 3,
+            //            OrderAmount = 1.99,
+            //            OrderDate = new DateTime(2020, 12, 2),
+            //            Shipped = true,
+            //            PaymentReceived = true,
+            //        }
+            //        #endregion
                     );
         }
     }
