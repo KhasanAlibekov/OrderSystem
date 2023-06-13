@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ordersystem.DataObjects
 {
-    public class Roles
+    public enum Roles
     {
+        Employee,
+        Admin,
+        Company,
+        Customer
     }
 }
