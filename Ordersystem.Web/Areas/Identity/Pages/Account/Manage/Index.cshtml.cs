@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Ordersystem.DataObjects;
 
 namespace Ordersystem.Web.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public IndexModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -59,30 +58,9 @@ namespace Ordersystem.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "Address")]
-            public string StreetAddress { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "PostalCode")]
-            public string PostalCode { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "City")]
-            public string City { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "Country")]
-            public string Country { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "Name")]
-            [Required]
-            public string Name { get; set; }
         }
 
-        private async Task LoadAsync(ApplicationUser user)
+        private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -91,11 +69,7 @@ namespace Ordersystem.Web.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
-                StreetAddress = user.StreetAddress,
-                City = user.City,
-                PostalCode = user.PostalCode,
-                Name = user.Name,
+                PhoneNumber = phoneNumber
             };
         }
 
@@ -135,29 +109,6 @@ namespace Ordersystem.Web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-
-            //extra veldjes toevoegen
-            if (Input.StreetAddress != user.StreetAddress)
-            {
-                user.StreetAddress = Input.StreetAddress;
-            }
-
-            if (Input.PostalCode != user.PostalCode)
-            {
-                user.PostalCode = Input.PostalCode;
-            }
-
-            if (Input.City != user.City)
-            {
-                user.City = Input.City;
-            }
-
-            if (Input.Name != user.Name)
-            {
-                user.Name = Input.Name;
-            }
-
-            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

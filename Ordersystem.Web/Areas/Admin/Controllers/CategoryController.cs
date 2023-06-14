@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class CategoryController : Controller
     {
         ICategoryService _service;

@@ -5,7 +5,7 @@
 namespace Ordersystem.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateRoles2 : Migration
+    public partial class GeneralUpdate2µ : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
