@@ -47,10 +47,8 @@ namespace Ordersystem.Services
 
             if (orderToUpdate != null)
             {
-                orderToUpdate.OrderAmount = newOrder.OrderAmount;
-                orderToUpdate.OrderDate = newOrder.OrderDate;
-                orderToUpdate.Shipped = newOrder.Shipped;
-                orderToUpdate.PaymentReceived = newOrder.PaymentReceived;
+                orderToUpdate.OrderCount = newOrder.OrderCount;
+                orderToUpdate.OrderDate = DateTime.Now;
 
                 _context.Update(orderToUpdate);
                 _context.SaveChanges();

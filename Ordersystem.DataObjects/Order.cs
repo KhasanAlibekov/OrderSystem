@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Ordersystem.DataObjects
 {
@@ -14,9 +15,17 @@ namespace Ordersystem.DataObjects
         [Key]
         [Column("Id")]
         public int OrderID { get; set; }
-        public double OrderAmount { get; set; }
+        [Range(1, 999, ErrorMessage = "Please enter a value between 1 and 999")]
+        public int OrderCount { get; set; }
         public DateTime OrderDate { get; set; }
-        public bool Shipped { get; set; }
-        public bool PaymentReceived { get; set; }
+        [ForeignKey("Product_ID")]
+        [ValidateNever]
+        public int ProductID { get; set; }
+        public Product Product { get; set; }
+
+        [ForeignKey("ApplicationUser_ID")]
+        [ValidateNever]
+        public int ApplicationUserID { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

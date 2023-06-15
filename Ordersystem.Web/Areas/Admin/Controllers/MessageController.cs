@@ -20,6 +20,12 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View(message);
         }
 
+        public IActionResult Details(int id)
+        {
+            var message = _serviceMessage.GetMessageByID(id);
+            return View(message);
+        }
+
         public IActionResult Upsert(int? id)
         {
             if (id == null)

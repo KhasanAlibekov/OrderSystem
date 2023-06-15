@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 using Ordersystem.Web.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Ordersystem.Web.Areas.Customer.Controllers
 {
@@ -26,10 +28,26 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
 
         public IActionResult Details(int id)
         {
-            Product product = _productService.GetProductByID(id);
-            return View(product);
+            Order order = new()
+            {
+                Product = _productService.GetProductByID(id),
+                OrderCount = 1,
+                ProductID = id
+
+            };
+            return View(order);
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(Order order)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            order.ApplicationUserID = Convert.ToInt32(userId);
+
+            return View(order);
+        }
         public IActionResult Privacy()
         {
             return View();

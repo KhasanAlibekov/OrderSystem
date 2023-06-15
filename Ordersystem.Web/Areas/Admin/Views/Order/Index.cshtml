@@ -26,17 +26,12 @@
         <thead>
             <tr>
                 <th>
-                    Order Amount
+                    Count
                 </th>
                 <th>
                     Order Date
                 </th>
-                <th>
-                    Shipped
-                </th>
-                <th>
-                    Paid
-                </th>
+                
                 <th></th>
             </tr>
         </thead>
@@ -45,17 +40,12 @@
             {
                 <tr>
                     <td>
-                        @obj.OrderAmount
+                        @obj.OrderCount
                     </td>
                     <td>
                         @obj.OrderDate
                     </td>
-                    <td>
-                        @obj.Shipped
-                    </td>
-                    <td>
-                        @obj.PaymentReceived
-                    </td>
+                   
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Order" asp-action="Edit" asp-route-id="@obj.OrderID" class="btn btn-primary mx-2">

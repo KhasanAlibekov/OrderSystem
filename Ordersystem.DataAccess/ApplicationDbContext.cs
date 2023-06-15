@@ -35,7 +35,7 @@ namespace Ordersystem.DataAccess
             }
         }
 
-        // Seed Category and Supplier tables to the Db
+        // Seed Category, Product, Message and Supplier tables to the Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -136,50 +136,24 @@ namespace Ordersystem.DataAccess
                         Price = 0.99D,
                         UnitInStock = 879,
                         ImageUrl = ""
-                    }
+                    });
                     #endregion
 
-                    //        #region Order data
-
-                    //modelBuilder.Entity<Order>().HasData(
-                    //        new Order
-                    //        {
-                    //            OrderID = 1,
-                    //            OrderAmount = 1.99,
-                    //            OrderDate = new DateTime(2020, 12, 2),
-                    //            Shipped = true,
-                    //            PaymentReceived = true,
-                    //        },
-                    //        new Order
-                    //        {
-                    //            OrderID = 2,
-                    //            OrderAmount = 19.99,
-                    //            OrderDate = new DateTime(2021, 1, 3),
-                    //            Shipped = true,
-                    //            PaymentReceived = true,
-                    //        },
-                    //        new Order
-                    //        {
-                    //            OrderID = 3,
-                    //            OrderAmount = 1.99,
-                    //            OrderDate = new DateTime(2020, 12, 2),
-                    //            Shipped = true,
-                    //            PaymentReceived = true,
-                    //        }
-                    //        #endregion
-                    );
-            modelBuilder.Entity<Message>().HasData(
+            #region Message data
+         modelBuilder.Entity<Message>().HasData(
                     new Message
                     {
                         MessageID = 1,
                         Title = "okdokdoqsqs",
                         Content = "Nothing will be done today",
+                        Type = MessageType.ImportantAnnouncement,
                         Date = DateTime.Now,
                     },
                     new Message
                     {
                         MessageID = 2,
                         Title = "kfneofnoenfoeznfoeznfoezofezofezofez",
+                        Type = MessageType.StatusMessage,
                         Content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                         Date = DateTime.Now,
                     },
@@ -187,6 +161,7 @@ namespace Ordersystem.DataAccess
                     {
                         MessageID = 3,
                         Title = "ezdjezfoejzofjezfjezofoeznfoezfoez",
+                        Type = MessageType.ImportantAnnouncement,
                         Content = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
                         Date = DateTime.Now,
                     },
@@ -194,10 +169,12 @@ namespace Ordersystem.DataAccess
                     {
                         MessageID = 4,
                         Title = "oqssjsqjdçazjdozdozod",
+                        Type = MessageType.StatusMessage,
                         Content = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
                         Date = DateTime.Now,
                     }
                     );
+            #endregion
         }
     }
 }

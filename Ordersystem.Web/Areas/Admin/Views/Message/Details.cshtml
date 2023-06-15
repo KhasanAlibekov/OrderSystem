@@ -1,0 +1,65 @@
+﻿@model Ordersystem.DataObjects.Message
+
+<div class="card border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        @* add enctype="multipart/form-data" for file upload *@
+        <form method="post" class="row">
+            <input asp-for="@Model.MessageID" hidden />
+            <div class="row">
+                <div class="col-12">
+                    <div class="border p-3">
+                        @* <div asp-validation-summary="All"></div>*@
+                        <div class="py-2 col-12">
+                            <label asp-for="@Model.Title"  class="ms-2"></label>
+                            <input asp-for="@Model.Title" disabled class="form-control" type="text" placeholder="Title input" />
+
+                            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                        </div>
+                        <div class="py-2 col-12">
+                            <label asp-for="Content" class="ms-2 text-muted"></label>
+                            <textarea asp-for="Content" disabled class="form-control border-0"></textarea>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Date" disabled class="form-control border-0" />
+                            <label asp-for="Date" class="ms-2"></label>
+
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="row pt-2">
+
+                            <div class="col-6 col-md-4">
+                                <a asp-controller="Message" asp-action="Index" class="btn btn-outline-primary border form-control">
+                                    Back to the message board
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
