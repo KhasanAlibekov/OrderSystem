@@ -1,0 +1,54 @@
+﻿@model Ordersystem.DataObjects.Message
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">Delete Message</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="MessageID" hidden />
+            <div class="border p-3 mt-4">
+
+                @* <div asp-validation-summary="All"></div>*@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Title" disabled class="form-control border-0" />
+                    <label asp-for="Title" class="ms-2"></label>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Content" disabled class="form-control border-0" />
+                    <label asp-for="Content" class="ms-2"></label>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Date" disabled class="form-control border-0" />
+                    <label asp-for="Date" class="ms-2"></label>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger form-control">Delete</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Supplier" asp-action="Index" class="btn btn-outline-secondary border form-control">
+                            Back to the list
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

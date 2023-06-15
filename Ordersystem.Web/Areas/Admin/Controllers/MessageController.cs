@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class MessageController : Controller
     {
         IMessageService _serviceMessage;
@@ -26,6 +29,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View(message);
         }
 
+        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         public IActionResult Upsert(int? id)
         {
             if (id == null)
@@ -45,6 +49,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         [HttpPost]
         public IActionResult Upsert(int? id, Message objMessage)
         {
@@ -74,10 +79,10 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
-
             return View(objMessage);
         }
 
+        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         public IActionResult Delete(int id)
         {
             var data = _serviceMessage.GetMessageByID(id);

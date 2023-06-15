@@ -15,7 +15,18 @@
 
 <div class="container text">
     <div class="row">
-        <div class="col">
+        <div class="col text">
+            
+                @if (User.IsInRole(ApplicationRoles.Role_Admin))
+                {
+                <div class="col text">
+                    <a asp-controller="Message" asp-action="Upsert" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i>  Create New Message
+                    </a>
+                </div>
+
+                }
+
             <div class="card-columns">
                 <div class="card">
                     <h5 class="card-title text-bg-danger text-center">Important Announcement</h5>
@@ -25,11 +36,11 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th class ="text-wrap">
                                             Title
                                         </th>
-                                        <th>
-                                            Posted
+                                        <th class="text-wrap">
+                                            Post date
                                         </th>
                                         <th></th>
                                     </tr>
@@ -38,18 +49,28 @@
                                     @foreach (var message in Model.Where(m => m.Type == Ordersystem.DataObjects.MessageType.ImportantAnnouncement))
                                     {
                                         <tr>
-                                            <td>
+                                            <td class="text-wrap">
                                                 @message.Title
                                             </td>
-                                            <td>
+                                            <td class="text-wrap">
                                                 @message.Date
                                             </td>
                                             <td class="text-center">
                                                 <div class="w-75 btn-group" role="group">
 
-                                                    <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.Title" class="btn btn-outline-danger mx-2">
+                                                    <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn-outline-danger mx-2">
                                                         <i class="bi border-info"></i> More
                                                     </a>
+                                                    @if (User.IsInRole(ApplicationRoles.Role_Admin))
+                                                    {
+                                                        <a asp-controller="Message" asp-action="Upsert" asp-route-id="@message.MessageID" class="btn btn-primary mx-2">
+                                                            <i class="bi bi-pencil-square"></i> Edit
+                                                        </a>
+
+                                                        <a asp-controller="Message" asp-action="Delete" asp-route-id="@message.MessageID" class="btn btn-danger mx-2">
+                                                            <i class="bi bi-trash"></i> Delete
+                                                        </a>
+                                                    }
                                                 </div>
                                             </td>
                                         </tr>
@@ -73,11 +94,12 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th class="text-wrap">
                                             Title
                                         </th>
-                                        <th>
-                                            Posted
+                                        <th class="text-wrap">
+                                            
+                                            Post date
                                         </th>
                                         <th></th>
                                     </tr>
@@ -86,18 +108,29 @@
                                     @foreach (var message in Model.Where(m => m.Type == Ordersystem.DataObjects.MessageType.StatusMessage))
                                     {
                                         <tr>
-                                            <td>
+                                            <td class="text-wrap">
                                                 @message.Title
                                             </td>
-                                            <td>
+                                            <td class="text-wrap">
+                                                
                                                 @message.Date
                                             </td>
                                             <td class="text-center">
                                                 <div class="w-75 btn-group" role="group">
 
-                                                    <a asp-controller="Message" asp-action="Index1" asp-route-id="                                       @message.MessageID" class="btn btn-info mx-2">
+                                                    <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn btn-outline-info mx-2">
                                                         <i class="bi border-info"></i> More
                                                     </a>
+                                                    @if (User.IsInRole(ApplicationRoles.Role_Admin))
+                                                    {
+                                                        <a asp-controller="Message" asp-action="Upsert" asp-route-id="@message.MessageID" class="btn btn-primary mx-2">
+                                                            <i class="bi bi-pencil-square"></i> Edit
+                                                        </a>
+
+                                                        <a asp-controller="Message" asp-action="Delete" asp-route-id="@message.MessageID" class="btn btn-danger mx-2">
+                                                            <i class="bi bi-trash"></i> Delete
+                                                        </a>
+                                                    }
                                                 </div>
                                             </td>
                                         </tr>
@@ -112,8 +145,3 @@
 
     </div>
 </div>
-
-
-<br />
-
-
