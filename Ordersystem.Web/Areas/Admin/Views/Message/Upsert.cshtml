@@ -1,0 +1,23 @@
+﻿@model Ordersystem.DataObjects.Message
+
+<h2>@(Model.MessageID > 0 ? "Update Message" : "Create Message")</h2>
+
+@using (Html.BeginForm())
+{
+    @if (Model.MessageID > 0)
+    {
+        @Html.HiddenFor(model => model.MessageID)
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type)
+        @Html.DropDownListFor(model => model.Type, Enum.GetValues(typeof(Ordersystem.DataObjects.MessageType)).Cast<Ordersystem.DataObjects.MessageType>().Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString(), Selected = Model.Type == e }), new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content)
+        @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <button type="submit" class="btn btn-primary">@(Model.MessageID > 0 ? "Update" : "Create")</button>
+}

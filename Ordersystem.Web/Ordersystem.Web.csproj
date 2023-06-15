@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Company\" />
     <Folder Include="Areas\Staff\" />
-    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
 </Project>

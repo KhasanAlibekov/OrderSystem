@@ -161,7 +161,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        #region API
+        #region API region
         [HttpGet]
         public IActionResult Get()
         {

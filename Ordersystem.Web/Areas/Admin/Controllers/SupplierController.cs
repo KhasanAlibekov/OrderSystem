@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 using System.Data;
@@ -10,59 +12,84 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
     //[Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class SupplierController : Controller
     {
-        ISupplierService _service;
+        ISupplierService _serviceSupplier;
         public SupplierController(ISupplierService service)
         {
-            _service = service;
+            _serviceSupplier = service;
         }
         [Route("Supplier")]
         public IActionResult Index()
         {
-            var data = _service.GetAllSuppliers();
+            var data = _serviceSupplier.GetAllSuppliers();
             return View(data);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Upsert(int? id)
         {
-            var data = _service.GetSupplierByID(id);
-            return View(data);
+            if (id == null)
+            {
+                // Create
+                return View(new Supplier());
+            }
+            else
+            {
+                // Edit
+                Supplier supplierObj = _serviceSupplier.GetSupplierByID(id.Value);
+                if (supplierObj == null)
+                {
+                    return NotFound();
+                }
+                return View(supplierObj);
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Supplier objSupplier)
-        {
-            var data = _service.GetSupplierByID(id);
-            await TryUpdateModelAsync(data);
-            _service.Update(id, data);
-            TempData["succes"] = "Supplier updated succesfully";
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Supplier objSupplier)
+        public IActionResult Upsert(int? id, Supplier objSupplier)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(objSupplier);
-                TempData["succes"] = "Supplier created succesfully";
+                if (id == null)
+                {
+                    // Create product
+                    _serviceSupplier.Create(objSupplier);
+                    TempData["succes"] = "Supplier created succesfully";
+                }
+                else
+                {
+                    // Edit product
+                    var existingSupplier = _serviceSupplier.GetSupplierByID(id.Value);
+                    if (existingSupplier == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingSupplier.SupplierName = objSupplier.SupplierName;
+                    existingSupplier.VATNumber = objSupplier.VATNumber;
+                    existingSupplier.Address = objSupplier.Address;
+                    existingSupplier.City = objSupplier.City;
+                    existingSupplier.Country = objSupplier.Country;
+                    existingSupplier.PostalCode = objSupplier.PostalCode;
+                    existingSupplier.Email = objSupplier.Email;
+                    existingSupplier.Phone = objSupplier.Phone;
+
+                    _serviceSupplier.Update(id.Value, existingSupplier);
+                    TempData["succes"] = "Supplier updated succesfully";
+                }
                 return RedirectToAction("Index");
             }
-            return View();
+
+            return View(objSupplier);
         }
 
         public IActionResult Delete(int id)
         {
-            var data = _service.GetSupplierByID(id);
+            var data = _serviceSupplier.GetSupplierByID(id);
             return View(data);
         }
         [HttpPost]
         public IActionResult Delete(int id, Supplier objSupplier)
         {
-            _service.Delete(id);
+            _serviceSupplier.Delete(id);
             TempData["succes"] = "Supplier deleted succesfully";
             return RedirectToAction("Index");
         }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Ordersystem.DataObjects.Message>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h2>Message Board</h2>
+
+<h3>Status Messages</h3>
+<ul>
+    @foreach (var message in Model.Where(m => m.Type == Ordersystem.DataObjects.MessageType.StatusMessage))
+    {
+        <li>
+            <strong>Type:</strong> @message.Type<br />
+            <strong>Content:</strong> @message.Content<br />
+            <strong>Posted at:</strong> @message.Date
+        </li>
+    }
+</ul>
+
+<h3>Important Announcements</h3>
+<ul>
+    @foreach (var message in Model.Where(m => m.Type == Ordersystem.DataObjects.MessageType.ImportantAnnouncement))
+    {
+        <li>
+            <strong>Type:</strong> @message.Type<br />
+            <strong>Content:</strong> @message.Content<br />
+            <strong>Posted at:</strong> @message.Date
+        </li>
+    }
+</ul>
+
+<p>@Html.ActionLink("Create New Message", "Create")</p>
+

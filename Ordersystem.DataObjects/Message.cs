@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ordersystem.DataObjects
+{
+    [Table("TblMessage")]
+    public class Message
+    {
+        [Key]
+        [Column("Message_ID")]
+        public int MessageID { get; set; }
+        [Required]
+        [Column("Message_Title")]
+        [DisplayName("Title")] // Client UI side validation
+        public string Title { get; set; }
+        [Column("Message_Content")]
+        [DisplayName("Content")]
+        public string Content { get; set; }
+
+        public MessageType Type { get; set; }
+        [Column("Message_Date")]
+        [DisplayName("Date")]
+        public DateTime Date { get; set; }
+    }
+
+    public enum MessageType
+    {
+        StatusMessage,
+        ImportantAnnouncement
+    }
+}
