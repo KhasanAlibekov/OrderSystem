@@ -4,6 +4,7 @@ using Ordersystem.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Ordersystem.DataObjects;
+using Ordersystem.Web.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,5 +52,10 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    await SeedDataBaseHelper.Seed(scope.ServiceProvider);
+}
 
 app.Run();

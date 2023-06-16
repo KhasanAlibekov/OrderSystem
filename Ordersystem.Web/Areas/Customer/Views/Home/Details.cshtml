@@ -24,7 +24,9 @@
                         <img src="@("/" + Model.Product.ImageUrl)" width="100%" class="rounded" />
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
-
+                        @* <div class="col-12 col-md-6 pb-4">
+                            <span class="badge">@Model.Product.Category.CategoryName</span>
+                        </div> *@
                         <div class="col-12 col-md-6 pb-4">
                             @if (Model.Product.Category != null)
                             {
@@ -63,9 +65,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 pb-1">
-                                <button type="submit"
+                                <button type="submit" disabled
                                         class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    Add to Cart 
+                                    Add to Cart (Comming Soon...)
                                 </button>
                             </div>
                         </div>

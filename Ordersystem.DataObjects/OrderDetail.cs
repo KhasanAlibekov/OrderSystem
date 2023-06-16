@@ -34,10 +34,5 @@ namespace Ordersystem.DataObjects
         [ValidateNever]
         public int ProductID { get; set; }
         public Product Product { get; set; }
-
-        [ForeignKey("ApplicationUser_ID")]
-        [ValidateNever]
-        public string ApplicationUserID { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
     }
 }

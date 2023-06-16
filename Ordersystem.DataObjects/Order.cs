@@ -23,8 +23,19 @@ namespace Ordersystem.DataObjects
         public int OrderCount { get; set; }
 
         [Column("Order_OrderDate")]
-        [DisplayName("Date")]
+        [DisplayName("Order Date")]
         public DateTime OrderDate { get; set; }
+
+        [Column("Order_ShippingDate")]
+        [DisplayName("Shipping Date")]
+        public DateTime ShippingDate { get; set; }
+        public bool OrderStatus { get; set; }
+        public bool PaymentStatus { get; set; }
+
+        public string ApplicationUserID { get; set; }
+        [ForeignKey("ApplicationUserID")]
+        [ValidateNever]
+        public ApplicationUser ApplicationUser { get; set;}
 
         //[ForeignKey("Product_ID")]
         //[ValidateNever]

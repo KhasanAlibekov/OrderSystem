@@ -78,7 +78,7 @@ namespace Ordersystem.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Message_Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Message_Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
+                    Message_Type = table.Column<int>(type: "int", nullable: false),
                     Message_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -93,7 +93,12 @@ namespace Ordersystem.DataAccess.Migrations
                     Order_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Order_OrderCount = table.Column<int>(type: "int", nullable: false),
-                    Order_OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Order_OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Order_ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderStatus = table.Column<bool>(type: "bit", nullable: false),
+                    PaymentStatus = table.Column<bool>(type: "bit", nullable: false),
+                    ApplicationUserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationID = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -264,18 +269,11 @@ namespace Ordersystem.DataAccess.Migrations
                     OrderDetail_UnitPrice = table.Column<double>(type: "float", nullable: false),
                     OrderDetail_Quantity = table.Column<int>(type: "int", nullable: false),
                     OrderID = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ProductID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblOrderDetail", x => x.OrderDetail_Id);
-                    table.ForeignKey(
-                        name: "FK_TblOrderDetail_AspNetUsers_ApplicationUserID",
-                        column: x => x.ApplicationUserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TblOrderDetail_TblOrder_OrderID",
                         column: x => x.OrderID,
@@ -303,13 +301,13 @@ namespace Ordersystem.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "TblMessage",
-                columns: new[] { "Message_ID", "Message_Content", "Message_Date", "Message_Title", "Type" },
+                columns: new[] { "Message_ID", "Message_Content", "Message_Date", "Message_Title", "Message_Type" },
                 values: new object[,]
                 {
-                    { 1, "Nothing will be done today", new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2810), "okdokdoqsqs", 1 },
-                    { 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2888), "kfneofnoenfoeznfoeznfoezofezofezofez", 0 },
-                    { 3, "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).", new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2891), "ezdjezfoejzofjezfjezofoeznfoezfoez", 1 },
-                    { 4, "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2893), "oqssjsqjdçazjdozdozod", 0 }
+                    { 1, "Nothing will be done today", new DateTime(2023, 6, 16, 18, 16, 6, 732, DateTimeKind.Local).AddTicks(4063), "okdokdoqsqs", 1 },
+                    { 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new DateTime(2023, 6, 16, 18, 16, 6, 732, DateTimeKind.Local).AddTicks(4114), "kfneofnoenfoeznfoeznfoezofezofezofez", 0 },
+                    { 3, "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).", new DateTime(2023, 6, 16, 18, 16, 6, 732, DateTimeKind.Local).AddTicks(4115), "ezdjezfoejzofjezfjezofoeznfoezfoez", 1 },
+                    { 4, "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", new DateTime(2023, 6, 16, 18, 16, 6, 732, DateTimeKind.Local).AddTicks(4117), "oqssjsqjdçazjdozdozod", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -371,11 +369,6 @@ namespace Ordersystem.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblOrderDetail_ApplicationUserID",
-                table: "TblOrderDetail",
-                column: "ApplicationUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblOrderDetail_OrderID",
