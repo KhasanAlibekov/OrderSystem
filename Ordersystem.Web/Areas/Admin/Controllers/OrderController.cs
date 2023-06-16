@@ -10,31 +10,82 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
     //[Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class OrderController : Controller
     {
-        IOrderService _service;
+        IOrderService _serviceOrder;
         public OrderController(IOrderService service)
         {
-            _service = service;
+            _serviceOrder = service;
         }
 
         [Route("orders")]
         public IActionResult Index()
         {
-            var data = _service.GetAllOrders();
+            var data = _serviceOrder.GetAllOrders();
             return View(data);
+        }
+
+        public IActionResult Upsert(int? id)
+        {
+            if (id == null)
+            {
+                // Create
+                return View(new Order());
+            }
+            else
+            {
+                // Edit
+                Order orderObj = _serviceOrder.GetOrderByID(id.Value);
+                if (orderObj == null)
+                {
+                    return NotFound();
+                }
+                return View(orderObj);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Upsert(int? id, Order objOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    // Create product
+                    _serviceOrder.Create(objOrder);
+                    TempData["succes"] = "Supplier created succesfully";
+                }
+                else
+                {
+                    // Edit product
+                    var existingOrder = _serviceOrder.GetOrderByID(id.Value);
+                    if (existingOrder == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingOrder.OrderCount = objOrder.OrderCount;
+                    existingOrder.OrderDate = objOrder.OrderDate;
+                    
+                    _serviceOrder.Update(id.Value, existingOrder);
+                    TempData["succes"] = "Supplier updated succesfully";
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(objOrder);
         }
 
         public IActionResult Edit(int id)
         {
-            var data = _service.GetOrderByID(id);
+            var data = _serviceOrder.GetOrderByID(id);
             return View(data);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Order objOrder)
         {
-            var data = _service.GetOrderByID(id);
+            var data = _serviceOrder.GetOrderByID(id);
             await TryUpdateModelAsync(data);
-            _service.Update(id, data);
+            _serviceOrder.Update(id, data);
             TempData["succes"] = "Order updated succesfully";
             return RedirectToAction("Index");
         }
@@ -48,7 +99,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Create(objOrder);
+                _serviceOrder.Create(objOrder);
                 TempData["succes"] = "Order created succesfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -57,13 +108,13 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var data = _service.GetOrderByID(id);
+            var data = _serviceOrder.GetOrderByID(id);
             return View(data);
         }
         [HttpPost]
         public IActionResult Delete(int id, Order objOrder)
         {
-            _service.Delete(id);
+            _serviceOrder.Delete(id);
             TempData["succes"] = "Order deleted succesfully";
             return RedirectToAction("Index");
         }

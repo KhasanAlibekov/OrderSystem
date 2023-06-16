@@ -12,8 +12,8 @@ using Ordersystem.DataAccess;
 namespace Ordersystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230615140516_SeedMessageToDb")]
-    partial class SeedMessageToDb
+    [Migration("20230616092148_AddTablesToDb")]
+    partial class AddTablesToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -309,7 +309,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 1,
                             Content = "Nothing will be done today",
-                            Date = new DateTime(2023, 6, 15, 16, 5, 16, 169, DateTimeKind.Local).AddTicks(7649),
+                            Date = new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2810),
                             Title = "okdokdoqsqs",
                             Type = 1
                         },
@@ -317,7 +317,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 2,
                             Content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            Date = new DateTime(2023, 6, 15, 16, 5, 16, 169, DateTimeKind.Local).AddTicks(7704),
+                            Date = new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2888),
                             Title = "kfneofnoenfoeznfoeznfoezofezofezofez",
                             Type = 0
                         },
@@ -325,7 +325,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 3,
                             Content = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-                            Date = new DateTime(2023, 6, 15, 16, 5, 16, 169, DateTimeKind.Local).AddTicks(7706),
+                            Date = new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2891),
                             Title = "ezdjezfoejzofjezfjezofoeznfoezfoez",
                             Type = 1
                         },
@@ -333,7 +333,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 4,
                             Content = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-                            Date = new DateTime(2023, 6, 15, 16, 5, 16, 169, DateTimeKind.Local).AddTicks(7708),
+                            Date = new DateTime(2023, 6, 16, 11, 21, 48, 569, DateTimeKind.Local).AddTicks(2893),
                             Title = "oqssjsqjdçazjdozdozod",
                             Type = 0
                         });
@@ -344,32 +344,59 @@ namespace Ordersystem.DataAccess.Migrations
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("Order_Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
-                    b.Property<int>("ApplicationUserID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("OrderCount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Order_OrderCount");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Order_OrderDate");
+
+                    b.HasKey("OrderID");
+
+                    b.ToTable("TblOrder");
+                });
+
+            modelBuilder.Entity("Ordersystem.DataObjects.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("OrderDetail_Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailID"));
+
+                    b.Property<string>("ApplicationUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderID");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int")
+                        .HasColumnName("OrderDetail_Quantity");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float")
+                        .HasColumnName("OrderDetail_UnitPrice");
+
+                    b.HasKey("OrderDetailID");
+
+                    b.HasIndex("ApplicationUserID");
+
+                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("TblOrder");
+                    b.ToTable("TblOrderDetail");
                 });
 
             modelBuilder.Entity("Ordersystem.DataObjects.Product", b =>
@@ -622,11 +649,19 @@ namespace Ordersystem.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Ordersystem.DataObjects.Order", b =>
+            modelBuilder.Entity("Ordersystem.DataObjects.OrderDetail", b =>
                 {
                     b.HasOne("Ordersystem.DataObjects.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ordersystem.DataObjects.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Ordersystem.DataObjects.Product", "Product")
                         .WithMany()
@@ -635,6 +670,8 @@ namespace Ordersystem.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });

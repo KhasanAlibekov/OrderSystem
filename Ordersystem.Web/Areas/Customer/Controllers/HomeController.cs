@@ -28,10 +28,10 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
 
         public IActionResult Details(int id)
         {
-            Order order = new()
+            OrderDetail order = new()
             {
                 Product = _productService.GetProductByID(id),
-                OrderCount = 1,
+                Quantity = 1,
                 ProductID = id
 
             };
@@ -40,13 +40,14 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Details(Order order)
+        public IActionResult Details(OrderDetail orderDetail)
         {
             var identity = (ClaimsIdentity)User.Identity;
             var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            order.ApplicationUserID = Convert.ToInt32(userId);
+            orderDetail.ApplicationUserID = userId;
 
-            return View(order);
+            //_productService.Create(orderDetail);
+            return View(orderDetail);
         }
         public IActionResult Privacy()
         {

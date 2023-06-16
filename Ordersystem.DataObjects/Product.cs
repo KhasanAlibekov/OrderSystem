@@ -16,15 +16,19 @@ namespace Ordersystem.DataObjects
         [Key]
         [Column("Product_ID")]
         public int ProductID { get; set; }
+
         [Required]
         [Column("Product_Title")]
         public string Title { get; set; }
+
         [Required]
         [Column("Product_Description")]
         public string Description { get; set; }
+
         [Required]
         [Column("Product_Price")]
         public double Price { get; set; }
+
         [Required]
         [Column("Product_UnitInStock")]
         [DisplayName("Unit in stock")]
