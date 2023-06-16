@@ -1,5 +1,6 @@
 ﻿namespace Ordersystem.DataObjects
 {
+    // Define the application roles
     public static class ApplicationRoles
     {
         public const string Role_Customer = "Customer";

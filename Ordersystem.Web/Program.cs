@@ -31,8 +31,6 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddRazorPages();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

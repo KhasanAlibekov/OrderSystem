@@ -15,15 +15,19 @@ namespace Ordersystem.DataObjects
         [Key]
         [Column("Message_ID")]
         public int MessageID { get; set; }
+
         [Required]
         [Column("Message_Title")]
-        [DisplayName("Title")] // Client UI side validation
+        [DisplayName("Title")]
         public string Title { get; set; }
+
         [Column("Message_Content")]
         [DisplayName("Content")]
         public string Content { get; set; }
 
+        [Column("Message_Type")]
         public MessageType Type { get; set; }
+
         [Column("Message_Date")]
         [DisplayName("Date")]
         public DateTime Date { get; set; }

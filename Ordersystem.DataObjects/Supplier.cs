@@ -7,7 +7,7 @@ namespace Ordersystem.DataObjects
     [Table("TblSupplier")]
     public class Supplier
     {
-        [Key] // data annotation
+        [Key] 
         [Column("Supplier_ID")]
         public int SupplierID { get; set; }
 
