@@ -29,6 +29,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

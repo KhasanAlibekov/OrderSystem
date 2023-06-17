@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ordersystem.DataObjects.Product>
+﻿@model IEnumerable<Ordersystem.DataObjects.OrderDetail>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 class="text-black py-2">Product List</h2>
+            <h2 class="text-black py-2">Order Detail List</h2>
         </div>
     </div>
 </div>
@@ -17,8 +17,8 @@
         </div>
 
         <div class="col-6 text-end">
-            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i>  Create New Product
+            <a asp-controller="OrderDetail" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>  Create New Order Detail
             </a>
         </div>
     </div>
@@ -26,51 +26,45 @@
         <thead>
             <tr>
                 <th>
-                    Title
+                    Unit Price
                 </th>
                 <th>
-                    Price
+                    Quantity
                 </th>
                 <th>
-                    Unit in stock
+                    Product Title
                 </th>
                 <th>
-                    Category
-                </th>
-                <th>
-                    Supplier
+                    Order Date
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model.OrderBy(u => u.Title))
+            @foreach (var obj in Model.OrderBy(u => u.UnitPrice))
             {
                 <tr>
                     <td>
-                        @obj.Title
+                        @obj.UnitPrice
                     </td>
                     <td>
-                        @obj.Price
+                        @obj.Quantity
                     </td>
                     <td>
-                        @obj.UnitInStock
+                        @obj.Product.Title
                     </td>
                     <td>
-                        @obj.Category.CategoryName
-                    </td>
-                    <td>
-                        @obj.Supplier.SupplierName
+                        @obj.Order.OrderDate
                     </td>
 
 
                     <td class="text-center">
                         <div>
-                            <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.ProductID" class="btn btn-primary mx-2">
+                            <a asp-controller="OrderDetail" asp-action="Upsert" asp-route-id="@obj.OrderDetailID" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
 
-                            <a asp-controller="Product" asp-action="Delete" asp-route-id="@obj.ProductID" class="btn btn-danger mx-2">
+                            <a asp-controller="OrderDetail" asp-action="Delete" asp-route-id="@obj.OrderDetailID" class="btn btn-danger mx-2">
                                 <i class="bi bi-trash"></i> Delete
                             </a>
                         </div>

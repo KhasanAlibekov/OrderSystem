@@ -7,7 +7,6 @@ using Ordersystem.Services;
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    
     public class MessageController : Controller
     {
         IMessageService _serviceMessage;
