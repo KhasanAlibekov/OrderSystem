@@ -37,6 +37,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             {
                 Text = u.CategoryName,
                 Value = u.CategoryID.ToString(),
+                Selected = (id.HasValue && u.CategoryID == _serviceProduct.GetProductByID(id.Value)?.CategoryID)
             });
 
             ViewBag.CategoryList = CategoryList;
@@ -133,6 +134,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             {
                 Text = u.CategoryName,
                 Value = u.CategoryID.ToString(),
+                Selected = (id.HasValue && u.CategoryID == _serviceProduct.GetProductByID(id.Value)?.CategoryID)
             });
 
             ViewBag.CategoryList = CategoryList;

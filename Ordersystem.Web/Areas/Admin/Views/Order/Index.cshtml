@@ -26,12 +26,17 @@
         <thead>
             <tr>
                 <th>
-                    Count
+                    Order Count
                 </th>
                 <th>
                     Order Date
                 </th>
-                
+                <th>
+                    Order Status
+                </th>
+                <th>
+                    Payment Status
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -44,6 +49,12 @@
                     </td>
                     <td>
                         @obj.OrderDate
+                    </td>
+                    <td>
+                        @obj.OrderStatus
+                    </td>
+                    <td>
+                        @obj.PaymentStatus
                     </td>
                    
                     <td class="text-center">

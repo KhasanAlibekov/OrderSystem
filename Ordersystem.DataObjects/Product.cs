@@ -36,12 +36,12 @@ namespace Ordersystem.DataObjects
 
         [ValidateNever]
         [ForeignKey("Supplier")]
-        public int? SupplierID { get; set; }
+        public int SupplierID { get; set; }
         public Supplier? Supplier { get; set; }
 
         [ValidateNever]
         [ForeignKey("Category")]
-        public int? CategoryID { get; set; }
+        public int CategoryID { get; set; }
         public Category? Category { get; set; }
 
         [ValidateNever]

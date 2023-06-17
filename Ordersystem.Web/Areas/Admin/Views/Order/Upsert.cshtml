@@ -29,6 +29,20 @@
 
                             <span asp-validation-for="OrderDate" class="text-danger"></span>
                         </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="OrderStatus" class="form-control border-0" />
+                            <label asp-for="OrderStatus" class="ms-2"></label>
+
+                            <span asp-validation-for="OrderStatus" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="PaymentStatus" class="form-control border-0" />
+                            <label asp-for="PaymentStatus" class="ms-2"></label>
+
+                            <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                        </div>
                        
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">

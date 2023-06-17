@@ -13,11 +13,13 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService)
         {
             _logger = logger;
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -35,6 +37,9 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
                 ProductID = id
 
             };
+            int categoryID = (int)order.Product.CategoryID;
+
+            order.Product.Category = _categoryService.GetCategoryByID(categoryID);
             return View(order);
         }
 
