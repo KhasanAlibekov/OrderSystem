@@ -16,7 +16,7 @@ namespace Ordersystem.Services
     public class OrderDetailService : IOrderDetailService
     {
         private readonly ApplicationDbContext _context;
-        public OrderDetailService(ApplicationDbContext context) // Contructor injection
+        public OrderDetailService(ApplicationDbContext context) 
         {
             this._context = context;
         }
