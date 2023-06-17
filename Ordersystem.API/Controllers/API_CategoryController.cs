@@ -9,11 +9,11 @@ namespace Ordersystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class API_CategoryController : ControllerBase
     {
         ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public API_CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

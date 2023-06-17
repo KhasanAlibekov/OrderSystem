@@ -7,13 +7,13 @@ namespace Ordersystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class API_ProductController : ControllerBase
     {
         IProductService _productService;
         ICategoryService _categoryService;
         ISupplierService _supplierService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
+        public API_ProductController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
         {
             _productService = productService;
             _categoryService = categoryService;

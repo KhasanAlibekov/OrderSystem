@@ -8,11 +8,11 @@ namespace Ordersystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SupplierController : ControllerBase
+    public class API_SupplierController : ControllerBase
     {
         ISupplierService _supplierService;
 
-        public SupplierController(ISupplierService supplierService)
+        public API_SupplierController(ISupplierService supplierService)
         {
             _supplierService = supplierService;
         }

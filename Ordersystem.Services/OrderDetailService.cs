@@ -10,6 +10,7 @@ namespace Ordersystem.Services
         OrderDetail? GetOrderDetailByID(int id);
         OrderDetail Create(OrderDetail orderDetail);
         OrderDetail Update(int id, OrderDetail orderDetail);
+        OrderDetail CreateNewOrderDetail(OrderDetail orderDetail);
         bool Delete(int id);
     }
 
@@ -22,6 +23,13 @@ namespace Ordersystem.Services
         }
 
         public OrderDetail Create(OrderDetail orderDetail)
+        {
+            _context.OrderDetails.Add(orderDetail);
+            _context.SaveChanges();
+            return orderDetail;
+        }
+
+        public OrderDetail CreateNewOrderDetail(OrderDetail orderDetail)
         {
             _context.OrderDetails.Add(orderDetail);
             _context.SaveChanges();
