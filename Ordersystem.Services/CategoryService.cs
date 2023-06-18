@@ -1,13 +1,9 @@
 ﻿using Ordersystem.DataAccess;
 using Ordersystem.DataObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the CategoryService class
     public interface ICategoryService
     {
         List<Category> GetAllCategories();
@@ -16,10 +12,12 @@ namespace Ordersystem.Services
         Category Update(int id, Category newCategory);
         bool Delete(int id);
     }
+
+    //  The `CategoryService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class CategoryService : ICategoryService
     {
         private readonly ApplicationDbContext _context;
-        public CategoryService(ApplicationDbContext context) // Contructor injection
+        public CategoryService(ApplicationDbContext context)
         {
             this._context = context;
         }

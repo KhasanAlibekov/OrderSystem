@@ -1,14 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Ordersystem.DataAccess;
+﻿using Ordersystem.DataAccess;
 using Ordersystem.DataObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the MessageService class
     public interface IMessageService
     {
         List<Message> GetAllMessages();
@@ -18,6 +13,7 @@ namespace Ordersystem.Services
         bool Delete(int id);
     }
 
+    //  The `MessageService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class MessageService : IMessageService
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +22,7 @@ namespace Ordersystem.Services
             _context = context;
         }
 
+        // Read
         public List<Message> GetAllMessages()
         {
             return _context.Messages.ToList();

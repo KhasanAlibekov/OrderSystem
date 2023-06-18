@@ -1,13 +1,9 @@
 ﻿using Ordersystem.DataAccess;
 using Ordersystem.DataObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the SupplierService class
     public interface ISupplierService
     {
         List<Supplier> GetAllSuppliers();
@@ -16,10 +12,12 @@ namespace Ordersystem.Services
         Supplier Update(int id, Supplier newSupplier);
         bool Delete(int id);
     }
+
+    //  The `SupplierService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class SupplierService : ISupplierService
     {
         private readonly ApplicationDbContext _context;
-        public SupplierService(ApplicationDbContext context) // Contructor injection
+        public SupplierService(ApplicationDbContext context)
         {
             this._context = context;
         }
@@ -60,7 +58,6 @@ namespace Ordersystem.Services
 
                 return supplierToUpdate;
             }
-
             return null;
         }
 

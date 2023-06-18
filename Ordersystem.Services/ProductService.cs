@@ -4,6 +4,7 @@ using Ordersystem.DataObjects;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the ProductService class
     public interface IProductService
     {
         List<Product> GetAllProducts();
@@ -13,10 +14,11 @@ namespace Ordersystem.Services
         bool Delete(int id);
     }
 
+    //  The `ProductService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _context;
-        public ProductService(ApplicationDbContext context) // Contructor injection
+        public ProductService(ApplicationDbContext context)
         {
             this._context = context;
         }
@@ -59,7 +61,6 @@ namespace Ordersystem.Services
 
                 return productToUpdate;
             }
-
             return null;
         }
 

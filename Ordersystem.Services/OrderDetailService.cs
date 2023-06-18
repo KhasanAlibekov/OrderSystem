@@ -4,6 +4,7 @@ using Ordersystem.DataObjects;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the OrderDetailService class
     public interface IOrderDetailService
     {
         List<OrderDetail> GetAllOrderDetails();
@@ -14,6 +15,7 @@ namespace Ordersystem.Services
         bool Delete(int id);
     }
 
+    //  The `OrderDetailService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class OrderDetailService : IOrderDetailService
     {
         private readonly ApplicationDbContext _context;
@@ -72,7 +74,6 @@ namespace Ordersystem.Services
 
                 return orderDetailToUpdate;
             }
-
             return null;
         }
     }

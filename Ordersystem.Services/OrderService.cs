@@ -1,13 +1,9 @@
 ﻿using Ordersystem.DataAccess;
 using Ordersystem.DataObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.Services
 {
+    // Interface to define the contract for the OrderService class
     public interface IOrderService
     {
         List<Order> GetAllOrders();
@@ -17,10 +13,11 @@ namespace Ordersystem.Services
         bool Delete(int id);
     }
 
+    //  The `OrderService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
     public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _context;
-        public OrderService(ApplicationDbContext context) // Contructor injection
+        public OrderService(ApplicationDbContext context)
         {
             this._context = context;
         }
@@ -55,7 +52,6 @@ namespace Ordersystem.Services
 
                 return orderToUpdate;
             }
-
             return null;
         }
 
