@@ -4,7 +4,7 @@ namespace Ordersystem.API.Dto
 {
     public class OrderDetailDto
     {
-        [Required(ErrorMessage = "Please provide a product name")]
+        [Required(ErrorMessage = "Please provide a Order Detail")]
         public double UnitPrice { get; set; }
         public int Quantity { get; set; }
 

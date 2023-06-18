@@ -1,25 +1,52 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ordersystem.API.Dto;
 using Ordersystem.Services;
 
 namespace Ordersystem.API.Controllers
 {
+    #region Category API Controller Overview
+    /// <summary>
+    /// 1. **Dependencies:**
+    /// The controller has a dependency on the `ICategoryService` which is injected through the constructor.
+    ///
+    /// 2. **Routing and Attributes:** 
+    /// The class is decorated with the `[Route]` and `[ApiController]` attributes, which define the base route for the controller and
+    /// indicate that it is an API controller.
+    ///
+    /// 3. **Action Methods:**
+    /// - `Get`: Handles the HTTP GET request to retrieve all categories. It calls the `GetAllCategories` method of the `_categoryService` and
+    ///          returns the retrieved categories.
+    /// - `GetById`: Handles the HTTP GET request to retrieve a specific category by its ID. It calls the `GetCategoryByID` method of the
+    ///              `_categoryService` and returns the retrieved category.
+    /// - `GetByIdQueryParam`: Handles the HTTP GET request to retrieve a specific category by its ID, along with an optional personal 
+    ///                        message. It calls the `GetCategoryByID` method of the `_categoryService`, adds a personal message if
+    ///                        provided, and returns the category and the personal message.
+    /// - `Create`: Handles the HTTP POST request to create a new category. It calls the `Create` method of the `_categoryService` to create
+    ///             the category, and returns the created category.
+    /// - `Update`: Handles the HTTP PUT request to update an existing category by its ID. It calls the `Update` method of the
+    ///             `_categoryService` to update the category, and returns the updated category.
+    /// - `Delete`: Handles the HTTP DELETE request to delete a category by its ID. It calls the `Delete` method of the `_categoryService`
+    ///             and returns a success message if the deletion is successful.
+    ///
+    /// 4. **Exception Handling:**
+    /// The action methods include exception handling code within a try-catch block. If an exception occurs during the execution of an
+    /// action, it returns an appropriate HTTP status code and an error message indicating that something went wrong.
+    /// </summary>
+    #endregion
+
     [Route("api/[controller]")]
     [ApiController]
-    public class API_CategoryController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         ICategoryService _categoryService;
 
-        public API_CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
         //[Authorize]
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Get()
         {
             try

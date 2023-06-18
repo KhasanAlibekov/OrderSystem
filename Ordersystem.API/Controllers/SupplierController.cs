@@ -1,18 +1,46 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ordersystem.API.Dto;
 using Ordersystem.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace Ordersystem.API.Controllers
 {
+    #region Supplier API Controller Overview
+    /// <summary>
+    /// 1. **Dependencies:**
+    /// The controller has a dependency on the `ISupplierService` which is injected through the constructor.
+    ///
+    /// 2. **Routing and Attributes:** 
+    /// The class is decorated with the `[Route]` and `[ApiController]` attributes, which define the base route for the controller and
+    /// indicate that it is an API controller.
+    ///
+    /// 3. **Action Methods:**
+    /// - `Get`:    Handles the HTTP GET request to retrieve all suppliers. It calls the `GetAllSuppliers` method of the `_supplierService`
+    ///             and returns the retrieved suppliers.
+    /// - `GetById`: Handles the HTTP GET request to retrieve a specific supplier by its ID. It calls the `GetSupplierByID` method of the
+    ///             `_supplierService` and returns the retrieved supplier.
+    /// - `GetByIdQueryParam`: Handles the HTTP GET request to retrieve a specific supplier by its ID, along with an optional personal
+    ///             message. It calls the `GetSupplierByID` method of the `_supplierService`, adds a personal message if provided, and
+    ///             returns the supplier and the personal message.
+    /// - `Create`: Handles the HTTP POST request to create a new supplier. It calls the `Create` method of the `_supplierService` to create
+    ///             the supplier, and returns the created supplier.
+    /// - `Update`: Handles the HTTP PUT request to update an existing supplier by its ID. It calls the `Update` method of the
+    ///             `_supplierService` to update the supplier, and returns the updated supplier.
+    /// - `Delete`: Handles the HTTP DELETE request to delete a supplier by its ID. It calls the `Delete` method of the `_supplierService`
+    ///             and returns a success message if the deletion is successful.
+    ///
+    /// 4. **Exception Handling:**
+    /// The action methods include exception handling code within a try-catch block. If an exception occurs during the execution of an
+    /// action, it returns an appropriate HTTP status code and an error message indicating that something went wrong.
+    /// </summary>
+    #endregion
+
     [Route("api/[controller]")]
     [ApiController]
-    public class API_SupplierController : ControllerBase
+    public class SupplierController : ControllerBase
     {
         ISupplierService _supplierService;
 
-        public API_SupplierController(ISupplierService supplierService)
+        public SupplierController(ISupplierService supplierService)
         {
             _supplierService = supplierService;
         }
@@ -46,6 +74,30 @@ namespace Ordersystem.API.Controllers
                 }
 
                 return Ok(supplier);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, (new { Message = "Something went wrong please try again" }));
+            }
+        }
+
+        [HttpGet("byid")]
+        public IActionResult GetByIdQueryParam(int supplierId, string? personalMessage)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(personalMessage))
+                {
+                    personalMessage = "This is your personal message";
+                }
+
+                var supplier = _supplierService.GetSupplierByID(supplierId);
+
+                if (supplier == null)
+                {
+                    return NotFound("Supplier not found");
+                }
+                return Ok(new { supplier, personalMessage });
             }
             catch (Exception e)
             {

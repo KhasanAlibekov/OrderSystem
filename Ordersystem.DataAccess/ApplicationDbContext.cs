@@ -2,20 +2,13 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ordersystem.DataObjects;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Net;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        #region DbSet
+        // Represents the tables in Database
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -23,7 +16,7 @@ namespace Ordersystem.DataAccess
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        #endregion
 
         public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
@@ -33,6 +26,7 @@ namespace Ordersystem.DataAccess
             base.OnConfiguring(optionsBuilder);
             if (!optionsBuilder.IsConfigured)
             {
+                //  Configure the connection string for the database
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-8FFVHLE;Database=Ordersytem.DB;Integrated Security=True;Trust Server Certificate=True");
             }
         }

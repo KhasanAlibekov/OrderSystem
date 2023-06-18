@@ -1,17 +1,46 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ordersystem.API.Dto;
 using Ordersystem.Services;
 
 namespace Ordersystem.API.Controllers
 {
+    #region Order API Controller Overview
+    /// <summary>
+    /// 1. **Dependencies:**
+    /// The controller has a dependency on the `IOrderService` which is injected through the constructor.
+    ///
+    /// 2. **Routing and Attributes:** 
+    /// The class is decorated with the `[Route]` and `[ApiController]` attributes, which define the base route for the controller and
+    /// indicate that it is an API controller.
+    ///
+    /// 3. **Action Methods:**
+    /// - `Get`: Handles the HTTP GET request to retrieve all orders. It calls the `GetAllOrders` method of the `_orderService` and
+    ///          returns the retrieved orders.
+    /// - `GetById`: Handles the HTTP GET request to retrieve a specific order by its ID. It calls the `GetOrderByID` method of the
+    ///              `_orderService` and returns the retrieved order.
+    /// - `GetByIdQueryParam`: Handles the HTTP GET request to retrieve a specific order by its ID, along with an optional personal 
+    ///             message. It calls the `GetOrderByID` method of the `_orderService`, adds a personal message if provided, and returns the
+    ///             order and the personal message.
+    /// - `Create`: Handles the HTTP POST request to create a new order. It calls the `Create` method of the `_orderService` to create
+    ///             the order, and returns the created order.
+    /// - `Update`: Handles the HTTP PUT request to update an existing order by its ID. It calls the `Update` method of the
+    ///             `_orderService` to update the order, and returns the updated order.
+    /// - `Delete`: Handles the HTTP DELETE request to delete an order by its ID. It calls the `Delete` method of the `_orderService`
+    ///             and returns a success message if the deletion is successful.
+    ///
+    /// 4. **Exception Handling:**
+    /// The action methods include exception handling code within a try-catch block. If an exception occurs during the execution of an
+    /// action, it returns an appropriate HTTP status code and an error message indicating that something went wrong.
+    /// </summary>
+    #endregion
+
     [Route("api/[controller]")]
     [ApiController]
-    public class API_OrderController : ControllerBase
+    public class OrderController : ControllerBase
     {
         IOrderService _orderService;
 
-        public API_OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
         }

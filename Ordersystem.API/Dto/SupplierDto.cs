@@ -4,7 +4,7 @@ namespace Ordersystem.API.Dto
 {
     public class SupplierDto
     {
-        [Required(ErrorMessage = "Please provide a category name")]
+        [Required(ErrorMessage = "Please provide a supplier name")]
         public int VATNumber { get; set; }
         public string? SupplierName { get; set; }
         public string? Address { get; set; }

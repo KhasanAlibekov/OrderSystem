@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Ordersystem.API.Helper;
@@ -17,7 +15,7 @@ builder.Services.AddControllers();
 // Injection of ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Use Identity Core with IdentityUser (standard user)
+// Use Identity Core with ApplicationUser (standard user)
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -25,7 +23,6 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
-
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IProductService, ProductService>();
