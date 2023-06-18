@@ -8,7 +8,7 @@ using System.Data;
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = ApplicationRoles.Role_Admin)]
+    [Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class ProductController : Controller
     {
         IProductService _serviceProduct;
@@ -23,7 +23,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [Route("Product")]
         public IActionResult Index()
         {
             var productList = _serviceProduct.GetAllProducts();
@@ -71,62 +70,76 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
+                if (objProduct.Price <= 0)
                 {
-                    // Gives a random name for a file and extension
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwRootPath, @"images/product");
+                    ModelState.AddModelError("objProduct.Price", "Price must be greater than 0.");
+                }
 
-                    if (!string.IsNullOrEmpty(objProduct.ImageUrl))
+                if (objProduct.UnitInStock <= 10)
+                {
+                    ModelState.AddModelError("objProduct.UnitInStock", "Unit in stock must be greater than 10.");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    if (file != null)
                     {
-                        // Delete the old image
-                        var oldImage = Path.Combine(wwwRootPath, objProduct.ImageUrl);
+                        // Gives a random name for a file and extension
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        string productPath = Path.Combine(wwwRootPath, @"images/product");
 
-                        // Check if old image does exist
-                        if (System.IO.File.Exists(oldImage))
+                        if (!string.IsNullOrEmpty(objProduct.ImageUrl))
                         {
-                            System.IO.File.Delete(oldImage);
+                            // Delete the old image
+                            var oldImage = Path.Combine(wwwRootPath, objProduct.ImageUrl);
+
+                            // Check if old image does exist
+                            if (System.IO.File.Exists(oldImage))
+                            {
+                                System.IO.File.Delete(oldImage);
+                            }
                         }
+
+                        // Upload a new image
+                        using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+
+                        // Update image URL
+                        objProduct.ImageUrl = @"images/product/" + fileName;
                     }
 
-                    // Upload a new image
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    if (id == null)
                     {
-                        file.CopyTo(fileStream);
+                        // Create product
+                        _serviceProduct.Create(objProduct);
+                        TempData["succes"] = "Product created succesfully";
                     }
-
-                    // Update image URL
-                    objProduct.ImageUrl = @"images/product/" + fileName;
-                }
-
-                if (id == null)
-                {
-                    // Create product
-                    _serviceProduct.Create(objProduct);
-                    TempData["succes"] = "Product created succesfully";
-                }
-                else
-                {
-                    // Edit product
-                    var existingProduct = _serviceProduct.GetProductByID(id.Value);
-                    if (existingProduct == null)
+                    else
                     {
-                        return NotFound();
+                        // Edit product
+                        var existingProduct = _serviceProduct.GetProductByID(id.Value);
+                        if (existingProduct == null)
+                        {
+                            return NotFound();
+                        }
+
+                        existingProduct.Title = objProduct.Title;
+                        existingProduct.Description = objProduct.Description;
+                        existingProduct.Price = objProduct.Price;
+                        existingProduct.UnitInStock = objProduct.UnitInStock;
+                        existingProduct.ImageUrl = objProduct.ImageUrl;
+                        existingProduct.CategoryID = objProduct.CategoryID;
+                        existingProduct.SupplierID = objProduct.SupplierID;
+
+                        _serviceProduct.Update(id.Value, existingProduct);
+                        TempData["succes"] = "Product updated succesfully";
                     }
-
-                    existingProduct.Title = objProduct.Title;
-                    existingProduct.Description = objProduct.Description;
-                    existingProduct.Price = objProduct.Price;
-                    existingProduct.UnitInStock = objProduct.UnitInStock;
-                    existingProduct.ImageUrl = objProduct.ImageUrl;
-
-                    _serviceProduct.Update(id.Value, existingProduct);
-                    TempData["succes"] = "Product updated succesfully";
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
-
             // If model state is not valid, re-render the view with validation errors
 
             IEnumerable<SelectListItem> CategoryList = _serviceCategory.GetAllCategories().Select(u => new SelectListItem
@@ -160,14 +173,5 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             TempData["succes"] = "Product deleted succesfully";
             return RedirectToAction("Index");
         }
-
-        #region API region
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var productList = _serviceProduct.GetAllProducts();
-            return Json(new { data = productList });
-        }
-        #endregion
     }
 }

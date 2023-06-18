@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
-using System.Data;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = ApplicationRoles.Role_Admin)]
+    [Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class SupplierController : Controller
     {
         ISupplierService _serviceSupplier;
@@ -50,13 +47,13 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             {
                 if (id == null)
                 {
-                    // Create product
+                    // Create
                     _serviceSupplier.Create(objSupplier);
                     TempData["succes"] = "Supplier created succesfully";
                 }
                 else
                 {
-                    // Edit product
+                    // Edit
                     var existingSupplier = _serviceSupplier.GetSupplierByID(id.Value);
                     if (existingSupplier == null)
                     {

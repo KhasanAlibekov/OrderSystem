@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Ordersystem.Services\Ordersystem.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Staff\" />
-  </ItemGroup>
-
 </Project>

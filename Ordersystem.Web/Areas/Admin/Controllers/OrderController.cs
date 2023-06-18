@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
-using System.Data;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = ApplicationRoles.Role_Admin)]
+    [Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class OrderController : Controller
     {
         IOrderService _serviceOrder;

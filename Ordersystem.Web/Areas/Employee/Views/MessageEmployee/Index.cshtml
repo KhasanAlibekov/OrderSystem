@@ -12,31 +12,19 @@
     </div>
 </div>
 
-
 <div class="container text">
     <div class="row">
         <div class="col text">
-            
-                @if (User.IsInRole(ApplicationRoles.Role_Admin))
-                {
-                <div class="col text">
-                    <a asp-controller="Message" asp-action="Upsert" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i>  Create New Message
-                    </a>
-                </div>
-
-                }
-
             <div class="card-columns">
                 <div class="card">
-                    <h5 class="card-title text-bg-danger text-center">Important Announcement</h5>
+                    <h5 class="card-title text-bg-danger text-center">Important Announcements</h5>
                     <div class="col">
                         <div class="card-body p-4">
 
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class ="text-wrap">
+                                        <th class="text-wrap">
                                             Title
                                         </th>
                                         <th class="text-wrap">
@@ -59,18 +47,8 @@
                                                 <div class="w-75 btn-group" role="group">
                                                     @if ((User.IsInRole(ApplicationRoles.Role_Employee)) || (User.IsInRole(ApplicationRoles.Role_Admin)))
                                                     {
-                                                        <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn-outline-danger mx-2">
+                                                        <a asp-controller="MessageEmployee" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn-outline-danger mx-2">
                                                             <i class="bi border-info"></i> More
-                                                        </a>
-                                                    }
-                                                    @if (User.IsInRole(ApplicationRoles.Role_Admin))
-                                                    {
-                                                        <a asp-controller="Message" asp-action="Upsert" asp-route-id="@message.MessageID" class="btn btn-primary mx-2">
-                                                            <i class="bi bi-pencil-square"></i> Edit
-                                                        </a>
-
-                                                        <a asp-controller="Message" asp-action="Delete" asp-route-id="@message.MessageID" class="btn btn-danger mx-2">
-                                                            <i class="bi bi-trash"></i> Delete
                                                         </a>
                                                     }
                                                 </div>
@@ -100,7 +78,7 @@
                                             Title
                                         </th>
                                         <th class="text-wrap">
-                                            
+
                                             Post date
                                         </th>
                                         <th></th>
@@ -114,25 +92,15 @@
                                                 @message.Title
                                             </td>
                                             <td class="text-wrap">
-                                                
+
                                                 @message.Date
                                             </td>
                                             <td class="text-center">
                                                 <div class="w-75 btn-group" role="group">
                                                     @if ((User.IsInRole(ApplicationRoles.Role_Employee)) || (User.IsInRole(ApplicationRoles.Role_Admin)))
                                                     {
-                                                        <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn btn-outline-info mx-2">
+                                                        <a asp-controller="MessageEmployee" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn btn-outline-info mx-2">
                                                             <i class="bi border-info"></i> More
-                                                        </a>
-                                                    }
-                                                    @if (User.IsInRole(ApplicationRoles.Role_Admin))
-                                                    {
-                                                        <a asp-controller="Message" asp-action="Upsert" asp-route-id="@message.MessageID" class="btn btn-primary mx-2">
-                                                            <i class="bi bi-pencil-square"></i> Edit
-                                                        </a>
-
-                                                        <a asp-controller="Message" asp-action="Delete" asp-route-id="@message.MessageID" class="btn btn-danger mx-2">
-                                                            <i class="bi bi-trash"></i> Delete
                                                         </a>
                                                     }
                                                 </div>

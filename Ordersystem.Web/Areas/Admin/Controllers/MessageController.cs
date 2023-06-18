@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class MessageController : Controller
     {
         IMessageService _serviceMessage;
@@ -15,7 +15,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             _serviceMessage = service;
         }
 
-        [Route("Message")]
         public IActionResult Index()
         {
             var message = _serviceMessage.GetAllMessages();
@@ -28,7 +27,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View(message);
         }
 
-        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         public IActionResult Upsert(int? id)
         {
             if (id == null)
@@ -48,7 +46,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             }
         }
 
-        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         [HttpPost]
         public IActionResult Upsert(int? id, Message objMessage)
         {
@@ -56,9 +53,11 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             {
                 if (id == null)
                 {
-                    // Create product
+                    objMessage.Date = DateTime.Now; // Set creation datetime
+
                     _serviceMessage.Create(objMessage);
-                    TempData["succes"] = "Message created succesfully";
+
+                    TempData["succes"] = "Message created successfully";
                 }
                 else
                 {
@@ -72,6 +71,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     existingMessage.Title = objMessage.Title;
                     existingMessage.Content = objMessage.Content;
                     existingMessage.Date = DateTime.Now;
+                    existingMessage.Type = objMessage.Type;
 
                     _serviceMessage.Update(id.Value, existingMessage);
                     TempData["succes"] = "Message updated succesfully";
@@ -81,7 +81,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View(objMessage);
         }
 
-        [Authorize(Roles = ApplicationRoles.Role_Admin)]
         public IActionResult Delete(int id)
         {
             var data = _serviceMessage.GetMessageByID(id);

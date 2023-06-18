@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Ordersystem.DataObjects.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="text-black py-2">Product List</h2>
+        </div>
+    </div>
+</div>
+<div class="card-body p-4">
+    <div class="row pb-3">
+        <div class="col-6">
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="ProductEmployee" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>  Create New Product
+            </a>
+        </div>
+    </div>
+    <table id="tblData" class="table table-responsive table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Unit in stock
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Supplier
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderBy(u => u.Title))
+            {
+                <tr>
+                    <td>
+                        @obj.Title
+                    </td>
+                    <td>
+                        @obj.Price
+                    </td>
+                    <td>
+                        @obj.UnitInStock
+                    </td>
+                    <td>
+                        @obj.Category.CategoryName
+                    </td>
+                    <td>
+                        @obj.Supplier.SupplierName
+                    </td>
+
+
+                    <td class="text-center">
+                        <div>
+                            <a asp-controller="ProductEmployee" asp-action="Upsert" asp-route-id="@obj.ProductID" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

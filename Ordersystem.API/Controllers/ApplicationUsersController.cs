@@ -67,8 +67,7 @@ namespace Ordersystem.API.Controllers
             }
 
             user.Password = null;
-            // Created("", user);
-            //this will include location header where we can find newly created user.
+
             return CreatedAtAction("GetUser", new { username = user.UserName }, user);
         }
 

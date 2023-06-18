@@ -6,64 +6,113 @@ using Ordersystem.Services;
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = ApplicationRoles.Role_Admin)]
+    [Authorize(Roles = ApplicationRoles.Role_Admin)]
     public class CategoryController : Controller
     {
-        ICategoryService _service;
-        public CategoryController(ICategoryService service)
+        ICategoryService _serviceCategory;
+        public CategoryController(ICategoryService serviceCategory)
         {
-            _service = service;
+            _serviceCategory = serviceCategory;
         }
 
         [Route("Category")]
-        // This is an endpoint of an action method, how will this endpoint be triggered?
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _service.GetAllCategories();
+            List<Category> objCategoryList = _serviceCategory.GetAllCategories();
             return View(objCategoryList);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Upsert(int? id)
         {
-            var data = _service.GetCategoryByID(id);
-            return View(data);
+            if (id == null)
+            {
+                // Create
+                return View(new Category());
+            }
+            else
+            {
+                // Edit
+                Category categoryObj = _serviceCategory.GetCategoryByID(id.Value);
+                if (categoryObj == null)
+                {
+                    return NotFound();
+                }
+                return View(categoryObj);
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Category objCategory)
-        {
-            var data = _service.GetCategoryByID(id);
-            await TryUpdateModelAsync(data);
-            _service.Update(id, data);
-            TempData["succes"] = "Category updated succesfully";
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Category objCategory)
+        public IActionResult Upsert(int? id, Category objCategory)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(objCategory);
-                TempData["succes"] = "Category created succesfully";
-                return RedirectToAction("Index", "Category");
+                if (id == null)
+                {
+                    // Create 
+                    _serviceCategory.Create(objCategory);
+                    TempData["succes"] = "Category created succesfully";
+                }
+                else
+                {
+                    // Edit 
+                    var existingCategory = _serviceCategory.GetCategoryByID(id.Value);
+                    if (existingCategory == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingCategory.CategoryName = objCategory.CategoryName;
+
+                    _serviceCategory.Update(id.Value, existingCategory);
+                    TempData["succes"] = "Category updated succesfully";
+                }
+                return RedirectToAction("Index");
             }
-            return View();
+
+            return View(objCategory);
         }
+
+        //public IActionResult Edit(int id)
+        //{
+        //    var data = _service.GetCategoryByID(id);
+        //    return View(data);
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(int id, Category objCategory)
+        //{
+        //    var data = _service.GetCategoryByID(id);
+        //    await TryUpdateModelAsync(data);
+        //    _service.Update(id, data);
+        //    TempData["succes"] = "Category updated succesfully";
+        //    return RedirectToAction("Index");
+        //}
+
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult Create(Category objCategory)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _serviceCategory.Create(objCategory);
+        //        TempData["succes"] = "Category created succesfully";
+        //        return RedirectToAction("Index", "Category");
+        //    }
+        //    return View();
+        //}
 
         public IActionResult Delete(int id)
         {
-            var data = _service.GetCategoryByID(id);
+            var data = _serviceCategory.GetCategoryByID(id);
             return View(data);
         }
         [HttpPost]
         public IActionResult Delete(int id, Category objCategory)
         {
-            _service.Delete(id);
+            _serviceCategory.Delete(id);
             TempData["succes"] = "Category deleted succesfully";
             return RedirectToAction("Index");
         }

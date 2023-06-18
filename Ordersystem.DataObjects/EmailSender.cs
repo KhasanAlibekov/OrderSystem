@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordersystem.DataObjects
 {
@@ -11,7 +6,7 @@ namespace Ordersystem.DataObjects
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            // when you want to send email this was error when running 
+            // Logic for sending mail 
             return Task.CompletedTask;
         }
     }
