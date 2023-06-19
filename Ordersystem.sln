@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.DataObjects", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.Services", "Ordersystem.Services\Ordersystem.Services.csproj", "{B5E53C04-FD22-4E8E-8BAF-1F5F207A5502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordersystem.API", "Ordersystem.API\Ordersystem.API.csproj", "{45205303-53D8-42C4-89F2-5581EBE13188}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordersystem.API", "Ordersystem.API\Ordersystem.API.csproj", "{45205303-53D8-42C4-89F2-5581EBE13188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -22,7 +22,7 @@ namespace Ordersystem.DataObjects
         public string? SupplierName { get; set; }
 
         [Column("Supplier_Address")]
-        [DisplayName("Address (Street Name/Number, City, Postal Code")]
+        [DisplayName("Address")]
         public string? Address { get; set; }
 
         [Column("Supplier_City")]
