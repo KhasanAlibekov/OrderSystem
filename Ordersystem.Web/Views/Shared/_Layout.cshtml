@@ -34,10 +34,7 @@
                                 <a class="nav-link text" asp-area="Employee" asp-controller="ProductEmployee" asp-action="Index">Product</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-
+                     
                         @if (User.IsInRole(ApplicationRoles.Role_Admin))
                         {
                             <li class="nav-item dropdown">
@@ -70,6 +67,10 @@
                                 </ul>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

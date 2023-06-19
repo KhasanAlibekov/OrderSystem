@@ -53,15 +53,17 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             {
                 if (id == null)
                 {
+                    // Create
                     objMessage.Date = DateTime.Now; // Set creation datetime
 
                     _serviceMessage.Create(objMessage);
+                    string formattedDate = objMessage.Date.ToString("yyyy-MM-dd HH:mm");
 
                     TempData["succes"] = "Message created successfully";
                 }
                 else
                 {
-                    // Edit product
+                    // Edit
                     var existingMessage = _serviceMessage.GetMessageByID(id.Value);
                     if (existingMessage == null)
                     {
@@ -71,6 +73,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     existingMessage.Title = objMessage.Title;
                     existingMessage.Content = objMessage.Content;
                     existingMessage.Date = DateTime.Now;
+                    string formattedDate = existingMessage.Date.ToString("yyyy-MM-dd HH:mm");
                     existingMessage.Type = objMessage.Type;
 
                     _serviceMessage.Update(id.Value, existingMessage);

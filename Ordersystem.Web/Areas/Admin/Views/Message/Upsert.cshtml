@@ -72,14 +72,6 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
         });
     </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var dateInput = document.getElementById('dateInput');
-            var currentDate = new Date().toISOString().split('T')[0];
-            dateInput.value = currentDate;
-        });
-    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

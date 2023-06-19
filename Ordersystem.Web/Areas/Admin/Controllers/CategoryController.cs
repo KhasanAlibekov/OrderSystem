@@ -72,38 +72,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return View(objCategory);
         }
 
-        //public IActionResult Edit(int id)
-        //{
-        //    var data = _service.GetCategoryByID(id);
-        //    return View(data);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, Category objCategory)
-        //{
-        //    var data = _service.GetCategoryByID(id);
-        //    await TryUpdateModelAsync(data);
-        //    _service.Update(id, data);
-        //    TempData["succes"] = "Category updated succesfully";
-        //    return RedirectToAction("Index");
-        //}
-
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult Create(Category objCategory)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _serviceCategory.Create(objCategory);
-        //        TempData["succes"] = "Category created succesfully";
-        //        return RedirectToAction("Index", "Category");
-        //    }
-        //    return View();
-        //}
-
         public IActionResult Delete(int id)
         {
             var data = _serviceCategory.GetCategoryByID(id);

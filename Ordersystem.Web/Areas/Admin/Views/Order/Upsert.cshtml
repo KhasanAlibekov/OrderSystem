@@ -15,17 +15,17 @@
                 <div class="col-12">
                     <div class="border p-3">
                         <div class="py-2 col-12">
+                            <label asp-for="OrderDate" class="ms-2"></label>
+                            <input asp-for="OrderDate" class="form-control border-0" value="@Model.OrderDate.ToString("yyyy-MM-dd HH:mm:ss")" />
+
+                            <span asp-validation-for="OrderDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="py-2 col-12">
                             <label asp-for="OrderCount" class="ms-2"></label>
                             <input asp-for="OrderCount" class="form-control" type="text" placeholder="Title input" />
 
                             <span asp-validation-for="OrderCount" class="text-danger"></span>
-                        </div>
-
-                        <div class="py-2 col-12">
-                            <label asp-for="OrderDate" class="ms-2"></label>
-                            <input asp-for="OrderDate" class="form-control border-0"/>
-
-                            <span asp-validation-for="OrderDate" class="text-danger"></span>
                         </div>
 
                         <div class="py-2 col-12">

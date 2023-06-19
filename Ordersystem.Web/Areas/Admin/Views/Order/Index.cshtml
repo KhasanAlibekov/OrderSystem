@@ -26,10 +26,10 @@
         <thead>
             <tr>
                 <th>
-                    Order Count
+                    Order Date
                 </th>
                 <th>
-                    Order Date
+                    Order Count
                 </th>
                 <th>
                     Order Status
@@ -41,14 +41,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model)
+            @foreach (var obj in Model.OrderBy(u => u.OrderDate))
             {
                 <tr>
                     <td>
-                        @obj.OrderCount
+                        @obj.OrderDate
                     </td>
                     <td>
-                        @obj.OrderDate
+                        @obj.OrderCount
                     </td>
                     <td>
                         @obj.OrderStatus

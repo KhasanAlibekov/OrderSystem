@@ -60,7 +60,7 @@
                                                     @if ((User.IsInRole(ApplicationRoles.Role_Employee)) || (User.IsInRole(ApplicationRoles.Role_Admin)))
                                                     {
                                                         <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn-outline-danger mx-2">
-                                                            <i class="bi border-info"></i> More
+                                                            <i class="bi bi-info-circle-fill"></i> More
                                                         </a>
                                                     }
                                                     @if (User.IsInRole(ApplicationRoles.Role_Admin))
@@ -122,7 +122,7 @@
                                                     @if ((User.IsInRole(ApplicationRoles.Role_Employee)) || (User.IsInRole(ApplicationRoles.Role_Admin)))
                                                     {
                                                         <a asp-controller="Message" asp-action="Details" asp-route-id="                                       @message.MessageID" class="btn btn btn-outline-info mx-2">
-                                                            <i class="bi border-info"></i> More
+                                                            <i class="bi bi-info-circle-fill"></i> More
                                                         </a>
                                                     }
                                                     @if (User.IsInRole(ApplicationRoles.Role_Admin))
