@@ -84,23 +84,13 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                         return NotFound();
                     }
 
-                    if (objOrderDetail.UnitPrice <= 0)
-                    {
-                        ModelState.AddModelError("UnitPrice", "Unit price must be greater than 0.");
-                    }
-
-                    if (objOrderDetail.Quantity <= 0)
-                    {
-                        ModelState.AddModelError("Quantity", "Quantity must be greater than 0.");
-                    }
-
                     existingOrderDetail.UnitPrice = objOrderDetail.UnitPrice;
                     existingOrderDetail.Quantity = objOrderDetail.Quantity;
                     existingOrderDetail.ProductID = objOrderDetail.ProductID;
                     existingOrderDetail.OrderID = objOrderDetail.OrderID;
 
                     _orderDetailService.Update(id.Value, existingOrderDetail);
-                    TempData["succes"] = "Detail order updated succesfully";
+                    TempData["succes"] = "Order detail updated succesfully";
                 }
                 return RedirectToAction("Index");
             }
