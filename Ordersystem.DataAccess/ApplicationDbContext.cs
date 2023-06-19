@@ -54,7 +54,7 @@ namespace Ordersystem.DataAccess
                     new Supplier
                     {
                         SupplierID = 1,
-                        VATNumber = 123456789,
+                        VATNumber = "123456789",
                         SupplierName = "Syntra",
                         Address = "Pluim 4",
                         City = "Zwevegem",
@@ -66,7 +66,7 @@ namespace Ordersystem.DataAccess
                     new Supplier
                     {
                         SupplierID = 2,
-                        VATNumber = 987654321,
+                        VATNumber = "987654321",
                         SupplierName = "ABC Corporation",
                         Address = "123 Main Street",
                         City = "New York",
@@ -78,7 +78,7 @@ namespace Ordersystem.DataAccess
                     new Supplier
                     {
                         SupplierID = 3,
-                        VATNumber = 654321987,
+                        VATNumber = "654321987",
                         SupplierName = "XYZ Ltd.",
                         Address = "456 Elm Avenue",
                         City = "London",
@@ -90,7 +90,7 @@ namespace Ordersystem.DataAccess
                     new Supplier
                     {
                         SupplierID = 4,
-                        VATNumber = 246813579,
+                        VATNumber = "246813579",
                         SupplierName = "Global Enterprises",
                         Address = "789 Oak Lane",
                         City = "Sydney",
@@ -102,7 +102,7 @@ namespace Ordersystem.DataAccess
                      new Supplier
                      {
                          SupplierID = 5,
-                         VATNumber = 135792468,
+                         VATNumber = "135792468",
                          SupplierName = "Mega Suppliers Inc.",
                          Address = "10 Park Avenue",
                          City = "Toronto",
@@ -114,7 +114,7 @@ namespace Ordersystem.DataAccess
                      new Supplier
                      {
                          SupplierID = 6,
-                         VATNumber = 864209753,
+                         VATNumber = "864209753",
                          SupplierName = "Euro Trade",
                          Address = "Rue de la Liberté",
                          City = "Paris",
@@ -126,7 +126,7 @@ namespace Ordersystem.DataAccess
                      new Supplier
                      {
                          SupplierID = 7,
-                         VATNumber = 370592864,
+                         VATNumber = "370592864",
                          SupplierName = "Asia Wholesale",
                          Address = "123 Market Street",
                          City = "Tokyo",
@@ -138,7 +138,7 @@ namespace Ordersystem.DataAccess
                      new Supplier
                      {
                          SupplierID = 8,
-                         VATNumber = 958746213,
+                         VATNumber = "958746213",
                          SupplierName = "SouthAmerica Suppliers",
                          Address = "Avenida del Sol",
                          City = "São Paulo",

@@ -37,7 +37,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 Value = u.ProductID.ToString(),
             });
 
-            ViewBag.CategoryList = ProductList;
+            ViewBag.ProductList = ProductList;
 
             IEnumerable<SelectListItem> OrderList = _serviceOrder.GetAllOrders().Select(u => new SelectListItem
             {
@@ -45,7 +45,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 Value = u.OrderID.ToString(),
             });
 
-            ViewBag.SupplierList = OrderList;
+            ViewBag.OrderList = OrderList;
 
             if (id == null)
             {
@@ -73,7 +73,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 {
                     // Create product
                     _orderDetailService.Create(objOrderDetail);
-                    TempData["succes"] = "Product created succesfully";
+                    TempData["succes"] = "Detail order created succesfully";
                 }
                 else
                 {
@@ -83,12 +83,25 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     {
                         return NotFound();
                     }
+                  
+                    existingOrderDetail.ProductID = objOrderDetail.ProductID;
+                    existingOrderDetail.OrderID = objOrderDetail.OrderID;
+
+                    if (objOrderDetail.UnitPrice <= 0)
+                    {
+                        ModelState.AddModelError("UnitPrice", "Unit price must be greater than 0.");
+                    }
+
+                    if (objOrderDetail.Quantity <= 0)
+                    {
+                        ModelState.AddModelError("Quantity", "Quantity must be greater than 0.");
+                    }
 
                     existingOrderDetail.UnitPrice = objOrderDetail.UnitPrice;
                     existingOrderDetail.Quantity = objOrderDetail.Quantity;
 
                     _orderDetailService.Update(id.Value, existingOrderDetail);
-                    TempData["succes"] = "Details updated succesfully";
+                    TempData["succes"] = "Detail order updated succesfully";
                 }
                 return RedirectToAction("Index");
             }
@@ -101,7 +114,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 Value = u.ProductID.ToString(),
             });
 
-            ViewBag.CategoryList = ProductList;
+            ViewBag.ProductList = ProductList;
 
             IEnumerable<SelectListItem> OrderList = _serviceOrder.GetAllOrders().Select(u => new SelectListItem
             {
@@ -109,7 +122,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 Value = u.OrderID.ToString(),
             });
 
-            ViewBag.SupplierList = OrderList;
+            ViewBag.OrderList = OrderList;
 
             return View(objOrderDetail);
         }

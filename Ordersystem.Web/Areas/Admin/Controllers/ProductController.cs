@@ -70,76 +70,64 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (objProduct.Price <= 0)
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
                 {
-                    ModelState.AddModelError("objProduct.Price", "Price must be greater than 0.");
-                }
+                    // Gives a random name for a file and extension
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images/product");
 
-                if (objProduct.UnitInStock <= 10)
-                {
-                    ModelState.AddModelError("objProduct.UnitInStock", "Unit in stock must be greater than 10.");
-                }
-
-                if (ModelState.IsValid)
-                {
-                    string wwwRootPath = _webHostEnvironment.WebRootPath;
-                    if (file != null)
+                    if (!string.IsNullOrEmpty(objProduct.ImageUrl))
                     {
-                        // Gives a random name for a file and extension
-                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = Path.Combine(wwwRootPath, @"images/product");
+                        // Delete the old image
+                        var oldImage = Path.Combine(wwwRootPath, objProduct.ImageUrl);
 
-                        if (!string.IsNullOrEmpty(objProduct.ImageUrl))
+                        // Check if old image does exist
+                        if (System.IO.File.Exists(oldImage))
                         {
-                            // Delete the old image
-                            var oldImage = Path.Combine(wwwRootPath, objProduct.ImageUrl);
-
-                            // Check if old image does exist
-                            if (System.IO.File.Exists(oldImage))
-                            {
-                                System.IO.File.Delete(oldImage);
-                            }
+                            System.IO.File.Delete(oldImage);
                         }
-
-                        // Upload a new image
-                        using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-
-                        // Update image URL
-                        objProduct.ImageUrl = @"images/product/" + fileName;
                     }
 
-                    if (id == null)
+                    // Upload a new image
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
-                        // Create product
-                        _serviceProduct.Create(objProduct);
-                        TempData["succes"] = "Product created succesfully";
+                        file.CopyTo(fileStream);
                     }
-                    else
-                    {
-                        // Edit product
-                        var existingProduct = _serviceProduct.GetProductByID(id.Value);
-                        if (existingProduct == null)
-                        {
-                            return NotFound();
-                        }
 
-                        existingProduct.Title = objProduct.Title;
-                        existingProduct.Description = objProduct.Description;
-                        existingProduct.Price = objProduct.Price;
-                        existingProduct.UnitInStock = objProduct.UnitInStock;
-                        existingProduct.ImageUrl = objProduct.ImageUrl;
-                        existingProduct.CategoryID = objProduct.CategoryID;
-                        existingProduct.SupplierID = objProduct.SupplierID;
-
-                        _serviceProduct.Update(id.Value, existingProduct);
-                        TempData["succes"] = "Product updated succesfully";
-                    }
-                    return RedirectToAction("Index");
+                    // Update image URL
+                    objProduct.ImageUrl = @"images/product/" + fileName;
                 }
+
+                if (id == null)
+                {
+                    // Create product
+                    _serviceProduct.Create(objProduct);
+                    TempData["succes"] = "Product created succesfully";
+                }
+                else
+                {
+                    // Edit product
+                    var existingProduct = _serviceProduct.GetProductByID(id.Value);
+                    if (existingProduct == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingProduct.Title = objProduct.Title;
+                    existingProduct.Description = objProduct.Description;
+                    existingProduct.Price = objProduct.Price;
+                    existingProduct.UnitInStock = objProduct.UnitInStock;
+                    existingProduct.ImageUrl = objProduct.ImageUrl;
+                    existingProduct.CategoryID = objProduct.CategoryID;
+                    existingProduct.SupplierID = objProduct.SupplierID;
+
+                    _serviceProduct.Update(id.Value, existingProduct);
+                    TempData["succes"] = "Product updated succesfully";
+                }
+                return RedirectToAction("Index");
             }
+
             // If model state is not valid, re-render the view with validation errors
 
             IEnumerable<SelectListItem> CategoryList = _serviceCategory.GetAllCategories().Select(u => new SelectListItem

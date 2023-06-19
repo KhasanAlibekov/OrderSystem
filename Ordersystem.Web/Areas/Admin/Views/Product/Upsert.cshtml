@@ -30,12 +30,20 @@
                         <div class="py-2 col-12">
                             <label asp-for="Price" class="ms-2"></label>
                             <input asp-for="Price" class="form-control border-0" />
-
+                            @if (Model.Price <= 0)
+                            {
+                                <span class="text-danger">Price must be greater than 0.</span>
+                            }
+                            
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
                             <label asp-for="UnitInStock" class="ms-2"></label>
                             <input asp-for="UnitInStock" class="form-control border-0" />
+                            @if (Model.UnitInStock <= 10)
+                            {
+                                <span class="text-danger">Unit in stock must be greater than 10.</span>
+                            }
 
                             <span asp-validation-for="UnitInStock" class="text-danger"></span>
                         </div>

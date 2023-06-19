@@ -14,7 +14,7 @@ namespace Ordersystem.DataObjects
         [Required]
         [Column("Supplier_VATNumber")]
         [DisplayName("VAT Number")]
-        public int VATNumber { get; set; }
+        public string VATNumber { get; set; }
 
         [Required]
         [Column("Supplier_Name")]

@@ -9,13 +9,11 @@
         </div>
     </div>
     <div class="card-body p-4">
-        @* add enctype="multipart/form-data" for file upload *@
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="@Model.OrderID" hidden />
             <div class="row">
                 <div class="col-12">
                     <div class="border p-3">
-                        @* <div asp-validation-summary="All"></div>*@
                         <div class="py-2 col-12">
                             <label asp-for="OrderCount" class="ms-2"></label>
                             <input asp-for="OrderCount" class="form-control" type="text" placeholder="Title input" />
@@ -23,23 +21,25 @@
                             <span asp-validation-for="OrderCount" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="OrderDate" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="OrderDate" class="ms-2"></label>
+                            <input asp-for="OrderDate" class="form-control border-0"/>
 
                             <span asp-validation-for="OrderDate" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="OrderStatus" class="form-control border-0" />
-                            <label asp-for="OrderStatus" class="ms-2"></label>
+                        <div class="py-2 col-12">
+                            <label asp-for="OrderStatus" class="ms-2"></label><br>
+                            <input type="radio" asp-for="OrderStatus" value="true" /> Yes
+                            <input type="radio" asp-for="OrderStatus" value="false" /> No
 
                             <span asp-validation-for="OrderStatus" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="PaymentStatus" class="form-control border-0" />
-                            <label asp-for="PaymentStatus" class="ms-2"></label>
+                        <div class="py-2 col-12">
+                            <label asp-for="PaymentStatus" class="ms-2"></label><br>
+                            <input type="radio" asp-for="PaymentStatus" value="true" /> Yes
+                            <input type="radio" asp-for="PaymentStatus" value="false" /> No
 
                             <span asp-validation-for="PaymentStatus" class="text-danger"></span>
                         </div>

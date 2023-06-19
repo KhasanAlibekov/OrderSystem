@@ -69,6 +69,7 @@ namespace Ordersystem.Web.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Upsert(int? id, Product objProduct, IFormFile? file)
         {
+
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;

@@ -49,6 +49,11 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 if (id == null)
                 {
                     // Create product
+                    if (objOrder.OrderDate.Date != DateTime.Now)
+                    {
+                        ModelState.AddModelError("OrderDate", "Order date must be the current date.");
+                        return View(objOrder);
+                    }
                     _serviceOrder.Create(objOrder);
                     TempData["succes"] = "Supplier created succesfully";
                 }
@@ -62,8 +67,16 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     }
 
                     existingOrder.OrderCount = objOrder.OrderCount;
+                    existingOrder.OrderStatus = objOrder.OrderStatus;
+                    existingOrder.PaymentStatus = objOrder.PaymentStatus;
+                    if (objOrder.OrderDate.Date != DateTime.Now.Date)
+                    {
+                        ModelState.AddModelError("OrderDate", "Order date must be the current date.");
+                        return View(objOrder);
+                    }
+
                     existingOrder.OrderDate = objOrder.OrderDate;
-                    
+
                     _serviceOrder.Update(id.Value, existingOrder);
                     TempData["succes"] = "Supplier updated succesfully";
                 }
@@ -71,38 +84,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             }
 
             return View(objOrder);
-        }
-
-        public IActionResult Edit(int id)
-        {
-            var data = _serviceOrder.GetOrderByID(id);
-            return View(data);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, Order objOrder)
-        {
-            var data = _serviceOrder.GetOrderByID(id);
-            await TryUpdateModelAsync(data);
-            _serviceOrder.Update(id, data);
-            TempData["succes"] = "Order updated succesfully";
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Order objOrder)
-        {
-            if (ModelState.IsValid)
-            {
-                _serviceOrder.Create(objOrder);
-                TempData["succes"] = "Order created succesfully";
-                return RedirectToAction("Index", "Category");
-            }
-            return View();
         }
 
         public IActionResult Delete(int id)

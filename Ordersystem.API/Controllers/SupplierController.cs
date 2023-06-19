@@ -113,7 +113,7 @@ namespace Ordersystem.API.Controllers
                 var CreatedSupplier = _supplierService.Create(new Ordersystem.DataObjects.Supplier
                 {
                     SupplierName = supplier.SupplierName,
-                    VATNumber = supplier.VATNumber,
+                    //VATNumber = supplier.VATNumber,
                     Address = supplier.Address,
                     City = supplier.City,
                     PostalCode = supplier.PostalCode,
@@ -138,7 +138,7 @@ namespace Ordersystem.API.Controllers
                 var supplierToUpdate = _supplierService.Update(id, new Ordersystem.DataObjects.Supplier
                 {
                     SupplierName = supplier.SupplierName,
-                    VATNumber = supplier.VATNumber,
+                    //VATNumber = supplier.VATNumber,
                     Address = supplier.Address,
                     City = supplier.City,
                     PostalCode = supplier.PostalCode,

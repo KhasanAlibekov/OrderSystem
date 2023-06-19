@@ -61,13 +61,13 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     }
 
                     existingSupplier.SupplierName = objSupplier.SupplierName;
-                    existingSupplier.VATNumber = objSupplier.VATNumber;
                     existingSupplier.Address = objSupplier.Address;
                     existingSupplier.City = objSupplier.City;
                     existingSupplier.Country = objSupplier.Country;
+                    existingSupplier.Phone = objSupplier.Phone;
+                    existingSupplier.VATNumber = objSupplier.VATNumber;
                     existingSupplier.PostalCode = objSupplier.PostalCode;
                     existingSupplier.Email = objSupplier.Email;
-                    existingSupplier.Phone = objSupplier.Phone;
 
                     _serviceSupplier.Update(id.Value, existingSupplier);
                     TempData["succes"] = "Supplier updated succesfully";

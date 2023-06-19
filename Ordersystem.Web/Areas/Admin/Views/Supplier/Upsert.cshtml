@@ -18,51 +18,74 @@
                         @* <div asp-validation-summary="All"></div>*@
                         <div class="py-2 col-12">
                             <label asp-for="SupplierName" class="ms-2"></label>
-                            <input asp-for="SupplierName" class="form-control" type="text" placeholder="Title input" />
+                            <input asp-for="SupplierName" class="form-control" type="text"/>
 
                             <span asp-validation-for="SupplierName" class="text-danger"></span>
                         </div>
                         
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="VATNumber" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="VATNumber" class="ms-2"></label>
+                            <input asp-for="VATNumber" class="form-control border-0" />
+                            @if (!string.IsNullOrWhiteSpace(Model.VATNumber) && (Model.VATNumber.Length != 12 || !Model.VATNumber.StartsWith("BE")))
+                            {
+                                <span class="text-danger">VAT number must be a 12-character string starting with 'BE'.</span>
+                            }
+
 
                             <span asp-validation-for="VATNumber" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Address" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="Address" class="ms-2"></label>
+                            <input asp-for="Address" class="form-control border-0" />
 
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="City" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="City" class="ms-2"></label>
+                            <input asp-for="City" class="form-control border-0" />
 
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="City" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="City" class="ms-2"></label>
+                            <input asp-for="City" class="form-control border-0" />
 
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="PostalCode" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="PostalCode" class="ms-2"></label>
+                            <input asp-for="PostalCode" class="form-control border-0" />
+                            @if (!string.IsNullOrWhiteSpace(Model.PostalCode) && (Model.PostalCode.Length != 4 || Model.PostalCode.StartsWith("0")))
+                            {
+                                <span class="text-danger">Postal code must be a 4-digit string and cannot start with '0'.</span>
+                            }
 
                             <span asp-validation-for="PostalCode" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Phone" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="Phone" class="ms-2"></label>
+                            <input asp-for="Phone" class="form-control border-0" />
+                            @if (!string.IsNullOrWhiteSpace(Model.Phone))
+                            {
+                                if (Model.Phone.Length != 10 || !Model.Phone.StartsWith("0"))
+                                {
+                                    <span class="text-danger">Phone number must be a 10-digit string starting with '0'.</span>
+                                }
+                            }
+
 
                             <span asp-validation-for="Phone" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Email" class="form-control border-0" />
+                        <div class="py-2 col-12">
                             <label asp-for="Email" class="ms-2"></label>
+                            <input asp-for="Email" class="form-control border-0" />
+                            @if (!string.IsNullOrWhiteSpace(Model.Email) && (!Model.Email.Contains("@") || !Model.Email.EndsWith(".com")))
+                            {
+                                <span class="text-danger">Invalid email address. Email must be in the format 'example@example.com'.</span>
+                            }
+
+
 
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -95,13 +118,6 @@
 
 
 @section Scripts{
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
-        });
-    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }
