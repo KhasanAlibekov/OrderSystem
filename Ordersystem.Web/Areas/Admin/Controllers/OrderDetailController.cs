@@ -83,9 +83,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     {
                         return NotFound();
                     }
-                  
-                    existingOrderDetail.ProductID = objOrderDetail.ProductID;
-                    existingOrderDetail.OrderID = objOrderDetail.OrderID;
 
                     if (objOrderDetail.UnitPrice <= 0)
                     {
@@ -99,6 +96,8 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
 
                     existingOrderDetail.UnitPrice = objOrderDetail.UnitPrice;
                     existingOrderDetail.Quantity = objOrderDetail.Quantity;
+                    existingOrderDetail.ProductID = objOrderDetail.ProductID;
+                    existingOrderDetail.OrderID = objOrderDetail.OrderID;
 
                     _orderDetailService.Update(id.Value, existingOrderDetail);
                     TempData["succes"] = "Detail order updated succesfully";

@@ -26,14 +26,15 @@
         <thead>
             <tr>
                 <th>
+                    Product Title
+                </th>
+                <th>
                     Unit Price
                 </th>
                 <th>
                     Quantity
                 </th>
-                <th>
-                    Product Title
-                </th>
+             
                 <th>
                     Order Status
                 </th>
@@ -45,14 +46,15 @@
             {
                 <tr>
                     <td>
+                        @obj.Product.Title
+                    </td>
+                    <td>
                         @obj.UnitPrice
                     </td>
                     <td>
                         @obj.Quantity
                     </td>
-                    <td>
-                        @obj.Product.Title
-                    </td>
+                 
                     <td>
                         @obj.Order.OrderStatus
                     </td>
