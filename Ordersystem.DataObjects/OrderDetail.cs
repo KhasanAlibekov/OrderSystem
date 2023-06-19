@@ -23,11 +23,11 @@ namespace Ordersystem.DataObjects
         [ForeignKey("Order")]
         [ValidateNever]
         public int OrderID { get; set; }
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
 
         [ForeignKey("Product")]
         [ValidateNever]
         public int ProductID { get; set; }
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }

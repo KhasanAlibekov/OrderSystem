@@ -11,7 +11,6 @@ namespace Ordersystem.Services
         OrderDetail? GetOrderDetailByID(int id);
         OrderDetail Create(OrderDetail orderDetail);
         OrderDetail Update(int id, OrderDetail orderDetail);
-        OrderDetail CreateNewOrderDetail(OrderDetail orderDetail);
         bool Delete(int id);
     }
 
@@ -25,13 +24,6 @@ namespace Ordersystem.Services
         }
 
         public OrderDetail Create(OrderDetail orderDetail)
-        {
-            _context.OrderDetails.Add(orderDetail);
-            _context.SaveChanges();
-            return orderDetail;
-        }
-
-        public OrderDetail CreateNewOrderDetail(OrderDetail orderDetail)
         {
             _context.OrderDetails.Add(orderDetail);
             _context.SaveChanges();
@@ -57,12 +49,12 @@ namespace Ordersystem.Services
 
         public OrderDetail? GetOrderDetailByID(int id)
         {
-            return _context.OrderDetails.Where(c => c.OrderDetailID == id).Include(u => u.Order).Include(u => u.Product).FirstOrDefault();
+            return _context.OrderDetails.Where(c => c.OrderDetailID == id).FirstOrDefault();
         }
 
         public OrderDetail Update(int id, OrderDetail orderDetail)
         {
-            var orderDetailToUpdate = _context.OrderDetails.Where(c => c.OrderDetailID == id).Include(u => u.Order).Include(u => u.Product).FirstOrDefault();
+            var orderDetailToUpdate = _context.OrderDetails.Where(c => c.OrderDetailID == id).FirstOrDefault();
 
             if (orderDetailToUpdate != null)
             {

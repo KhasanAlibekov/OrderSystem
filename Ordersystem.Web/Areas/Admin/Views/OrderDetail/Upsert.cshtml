@@ -19,12 +19,12 @@
                     <div class="border p-3">
                         @* <div asp-validation-summary="All"></div>*@
                         <div class="py-2 col-12">
-                            <label asp-for="Product" class="ms-2"></label>
+                            <label asp-for="Product.Title" class="ms-2"></label>
                             <select asp-for="ProductID" asp-items="ViewBag.ProductList" class="form-select border-0">
                                 <option disabled selected>---Select Product---</option>
                             </select>
 
-                            <span asp-validation-for="ProductID" class="text-danger"></span>
+                            <span asp-validation-for="Product.Title" class="text-danger"></span>
                         </div>
 
                         <div class="py-2 col-12">
@@ -42,12 +42,12 @@
                         </div>
 
                         <div class="py-2 col-12">
-                            <label asp-for="Order" class="ms-2"></label>
+                            <label asp-for="Order.OrderDate" class="ms-2"></label>
                             <select asp-for="OrderID" asp-items="ViewBag.OrderList" class="form-select border-0">
                                 <option disabled selected>---Select Order---</option>
                             </select>
 
-                            <span asp-validation-for="OrderID" class="text-danger"></span>
+                            <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
                         </div>
 
 

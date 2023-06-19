@@ -21,7 +21,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             this._serviceOrder = serviceOrder;
         }
 
-        [Route("OrderDetail")]
         public IActionResult Index()
         {
             var orderDetailList = _orderDetailService.GetAllOrderDetails();
