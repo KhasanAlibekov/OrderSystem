@@ -13,7 +13,12 @@ namespace Ordersystem.Services
         bool Delete(int id);
     }
 
-    //  The `MessageService` class demonstrates the use of CRUD (Create, Read, Update, Delete) operations.
+    /// <summary>
+    /// The `MessageService` class demonstrates the use of CRUD (Create, Read, Update, Delete)
+    /// operations.
+    /// It implements the `IMessageService` interface and provides the necessary methods for working
+    /// with messages.
+    /// </summary>
     public class MessageService : IMessageService
     {
         private readonly ApplicationDbContext _context;
@@ -22,17 +27,31 @@ namespace Ordersystem.Services
             _context = context;
         }
 
-        // Read
+
+        /// <summary>
+        /// Retrieves all messages from the database.
+        /// </summary>
+        /// <returns>A list of Message objects representing all messages in the database.</returns>
         public List<Message> GetAllMessages()
         {
             return _context.Messages.ToList();
         }
 
+        /// <summary>
+        /// Retrieves a message from the database based on the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the message to retrieve.</param>
+        /// <returns>The Message object corresponding to the specified ID, or null if not found.</returns>
         public Message? GetMessageByID(int id)
         {
             return _context.Messages.Where(c => c.MessageID == id).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Creates a new message in the database.
+        /// </summary>
+        /// <param name="message">The Message object representing the message to create.</param>
+        /// <returns>The Message object representing the created message.</returns>
         public Message Create(Message message)
         {
             _context.Messages.Add(message);
@@ -40,6 +59,12 @@ namespace Ordersystem.Services
             return message;
         }
 
+        /// <summary>
+        /// Updates an existing message in the database with the provided data.
+        /// </summary>
+        /// <param name="id">The ID of the message to update.</param>
+        /// <param name="newMessage">The Message object containing the updated data for the message.</param>
+        /// <returns>The Message object representing the updated message, or null if the message with the specified ID is not found.</returns>
         public Message Update(int id, Message newMessage)
         {
             var messageToUpdate = _context.Messages.Where(c => c.MessageID == id).FirstOrDefault();
@@ -60,6 +85,11 @@ namespace Ordersystem.Services
             return null;
         }
 
+        /// <summary>
+        /// Deletes a message from the database based on the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the message to delete.</param>
+        /// <returns>True if the message was successfully deleted, false otherwise.</returns>
         public bool Delete(int id)
         {
             var result = _context.Messages.ToList().FirstOrDefault(c => c.MessageID == id, null);
