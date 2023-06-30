@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
 using System.Data;
+using System.Globalization;
 
 namespace Ordersystem.Web.Areas.Admin.Controllers
 {
@@ -64,6 +65,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        //[Culture("en-US")]
         public IActionResult Upsert(int? id, OrderDetail objOrderDetail)
         {
             if (ModelState.IsValid)
