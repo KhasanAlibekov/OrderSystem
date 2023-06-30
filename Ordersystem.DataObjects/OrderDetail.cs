@@ -15,9 +15,11 @@ namespace Ordersystem.DataObjects
 
         [DisplayName("Unit Price")]
         [Column("OrderDetail_UnitPrice")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Unit price must be greater than zero.")]
         public double UnitPrice { get; set; }
 
         [Column("OrderDetail_Quantity")]
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be greater than zero.")]
         public int Quantity { get; set; }
 
         [ForeignKey("Order")]

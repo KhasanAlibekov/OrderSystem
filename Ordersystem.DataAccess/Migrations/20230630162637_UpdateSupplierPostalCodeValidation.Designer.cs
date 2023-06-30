@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ordersystem.DataAccess;
 
@@ -11,9 +12,11 @@ using Ordersystem.DataAccess;
 namespace Ordersystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230630162637_UpdateSupplierPostalCodeValidation")]
+    partial class UpdateSupplierPostalCodeValidation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,7 +330,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 1,
                             Content = "Dear customers, we would like to inform you that there will be scheduled maintenance on our systems this weekend. During this time, you may experience temporary service interruptions. We apologize for any inconvenience caused and appreciate your understanding.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6368),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5846),
                             Title = "Important Update: Maintenance Schedule",
                             Type = 1
                         },
@@ -335,7 +338,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 2,
                             Content = "We are excited to announce the release of a new feature that will enhance your experience on our platform. The feature allows you to customize your profile and personalize your settings. We hope you enjoy this new addition and look forward to your feedback.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6427),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5900),
                             Title = "Status Update: New Feature Release",
                             Type = 0
                         },
@@ -343,7 +346,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 3,
                             Content = "Attention all users, we have recently detected suspicious activity on some user accounts. As a precautionary measure, we have reset passwords for those accounts and implemented additional security measures. Please ensure that your password is strong and unique. If you have any concerns, please contact our support team immediately.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6430),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5903),
                             Title = "Important Announcement: Security Alert",
                             Type = 1
                         },
@@ -351,7 +354,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 4,
                             Content = "We are pleased to inform you that the service disruption we experienced earlier has been resolved. Our technical team has identified and resolved the issue, and all services are now operating normally. Thank you for your patience and understanding.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6432),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5905),
                             Title = "Status Update: Service Disruption Resolved",
                             Type = 0
                         },
@@ -359,7 +362,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 5,
                             Content = "We are thrilled to announce the launch of our new product line. Join us on [Date] for an exclusive product launch event where you can be the first to experience our latest innovations. Don't miss this exciting opportunity to discover cutting-edge technology and explore new possibilities.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6433),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5907),
                             Title = "Important Announcement: Product Launch Event",
                             Type = 1
                         },
@@ -367,7 +370,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 6,
                             Content = "We are currently undergoing a system upgrade to enhance performance and introduce new features. During this time, you may experience intermittent service disruptions. Rest assured, our team is working diligently to minimize any inconvenience. We appreciate your patience and understanding.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6435),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5909),
                             Title = "Status Update: System Upgrade",
                             Type = 0
                         },
@@ -375,7 +378,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 7,
                             Content = "Mark your calendars for our highly anticipated annual sale event! Get ready for incredible discounts and exclusive offers on a wide range of products. This is your chance to save big and enjoy unbeatable deals. Don't miss out on this limited-time opportunity!",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6437),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5910),
                             Title = "Important Announcement: Annual Sale Event",
                             Type = 1
                         },
@@ -383,7 +386,7 @@ namespace Ordersystem.DataAccess.Migrations
                         {
                             MessageID = 8,
                             Content = "We are excited to introduce a new customer support channel to better serve you. Our dedicated support team is now available via live chat on our website. Simply visit our support page and click on the chat icon to connect with a representative. We're here to assist you with any inquiries or concerns.",
-                            Date = new DateTime(2023, 6, 30, 18, 37, 36, 571, DateTimeKind.Local).AddTicks(6438),
+                            Date = new DateTime(2023, 6, 30, 18, 26, 37, 750, DateTimeKind.Local).AddTicks(5912),
                             Title = "Status Update: New Customer Support Channel",
                             Type = 0
                         });

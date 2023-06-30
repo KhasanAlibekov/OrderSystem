@@ -49,16 +49,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 if (id == null)
                 {
                     // Create product
-                    if (objOrder.OrderDate.Date != DateTime.Now.Date)
-                    {
-                        ModelState.AddModelError("OrderDate", "Order date must be the current date.");
-                        return View(objOrder);
-                    }
-                    else
-                    {
-                        objOrder.OrderDate = objOrder.OrderDate.Date + DateTime.Now.TimeOfDay;
-                    }
-
+                    objOrder.OrderDate = DateTime.Now;
 
                     _serviceOrder.Create(objOrder);
                     TempData["succes"] = "Order created succesfully";
@@ -76,18 +67,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     existingOrder.OrderStatus = objOrder.OrderStatus;
                     existingOrder.PaymentStatus = objOrder.PaymentStatus;
 
-                    if (objOrder.OrderDate.Date != DateTime.Now.Date)
-                    {
-                        ModelState.AddModelError("OrderDate", "Order date must be the current date.");
-                        return View(objOrder);
-                    }
-                    else
-                    {
-                        objOrder.OrderDate = objOrder.OrderDate.Date + DateTime.Now.TimeOfDay;
-                    }
-
-
-                    existingOrder.OrderDate = objOrder.OrderDate;
+                    existingOrder.OrderDate = DateTime.Now;
 
                     _serviceOrder.Update(id.Value, existingOrder);
                     TempData["succes"] = "Order updated succesfully";

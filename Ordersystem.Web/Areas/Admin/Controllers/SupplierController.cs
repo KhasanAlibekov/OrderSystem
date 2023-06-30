@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HtmlAgilityPack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ordersystem.DataObjects;
 using Ordersystem.Services;
@@ -91,4 +92,36 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
     }
+
+    private void ExtractCitiesAndPostalCodes(string mhtmlFilePath, out List<string> cities, out List<string> postalCodes)
+    {
+        string mhtmlContent = System.IO.File.ReadAllText(mhtmlFilePath);
+
+        // Extract cities and postal codes using HTML parsing
+        HtmlDocument htmlDoc = new HtmlDocument();
+        htmlDoc.LoadHtml(mhtmlContent);
+
+        var trNodes = htmlDoc.DocumentNode.SelectNodes("//tr");
+
+        cities = new List<string>();
+        postalCodes = new List<string>();
+
+        if (trNodes != null)
+        {
+            foreach (var trNode in trNodes)
+            {
+                var tdNodes = trNode.SelectNodes("./td");
+
+                if (tdNodes != null && tdNodes.Count >= 2)
+                {
+                    string postalCode = tdNodes[0].InnerText.Trim();
+                    string city = tdNodes[1].InnerText.Trim();
+
+                    postalCodes.Add(postalCode);
+                    cities.Add(city);
+                }
+            }
+        }
+    }
+
 }

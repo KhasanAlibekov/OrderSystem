@@ -22,11 +22,13 @@ namespace Ordersystem.DataObjects
 
         [Required]
         [Column("Product_Price")]
+        [Range(0.01, double.MaxValue, ErrorMessage ="Price must be greater than zero.")]
         public double Price { get; set; }
 
         [Required]
         [Column("Product_UnitInStock")]
         [DisplayName("Unit in stock")]
+        [Range(1, int.MaxValue, ErrorMessage = "Unit in stock must be greater than zero.")]
         public int UnitInStock { get; set; }
 
         [ValidateNever]
