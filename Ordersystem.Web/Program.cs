@@ -44,8 +44,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
-
+// Double input numbers
 var supportedCultures = new[]
    {
             new CultureInfo("en-US"),
