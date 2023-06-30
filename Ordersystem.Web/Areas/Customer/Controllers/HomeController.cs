@@ -42,18 +42,6 @@ namespace Ordersystem.Web.Areas.Customer.Controllers
             order.Product.Category = _categoryService.GetCategoryByID(categoryID);
             return View(order);
         }
-
-        //[HttpPost]
-        //[Authorize]
-        //public IActionResult Details(OrderDetail orderDetail)
-        //{
-        //    var identity = (ClaimsIdentity)User.Identity;
-        //    var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    orderDetail.ApplicationUserID = userId;
-
-        //    //_productService.Create(orderDetail);
-        //    return View(orderDetail);
-        //}
         public IActionResult Privacy()
         {
             return View();

@@ -65,7 +65,6 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[Culture("en-US")]
         public IActionResult Upsert(int? id, OrderDetail objOrderDetail)
         {
             if (ModelState.IsValid)
@@ -74,7 +73,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                 {
                     // Create product
                     _orderDetailService.Create(objOrderDetail);
-                    TempData["succes"] = "Detail order created succesfully";
+                    TempData["succes"] = "Order detail created succesfully";
                 }
                 else
                 {

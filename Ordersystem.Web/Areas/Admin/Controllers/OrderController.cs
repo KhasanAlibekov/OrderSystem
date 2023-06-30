@@ -61,7 +61,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
 
 
                     _serviceOrder.Create(objOrder);
-                    TempData["succes"] = "Supplier created succesfully";
+                    TempData["succes"] = "Order created succesfully";
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace Ordersystem.Web.Areas.Admin.Controllers
                     existingOrder.OrderDate = objOrder.OrderDate;
 
                     _serviceOrder.Update(id.Value, existingOrder);
-                    TempData["succes"] = "Supplier updated succesfully";
+                    TempData["succes"] = "Order updated succesfully";
                 }
                 return RedirectToAction("Index");
             }
