@@ -60,7 +60,6 @@ To set up and run the application, please follow these instructions:
 11. Run the Application as Admin:
    - Run the application again.
    - When you go to the registration page, you will see a dropdown to choose roles, including admin, user, and employee.
-   -
 
  Choose the "admin" role to register as an admin user.
 
